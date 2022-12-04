@@ -1,0 +1,178 @@
+<%- include("partials/header") %>
+
+
+
+  <!-- Código para incluir as validações na cor vermelha-->
+  <style>
+    #frm-add-book label.error {
+      color: red;
+    }
+
+    .image-thumbnail {
+      height: 80px;
+      width: 80px;
+    }
+  </style>
+
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Editar Ocorrência</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Editar Ocorrência</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Edit Ocorrência</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form method="post" action="/admin/event-edit/<%= event.id %>"
+                id="frm-add-book">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Produto:</label>
+                      <select class="form-control" required name="product">
+                        <option value="" disabled selected>Produto:</option>
+                        <% products.forEach(function(product){ %>
+                          <option <% if ( event.product_id == product.id ) { %> selected <% } %> value="<%= product.id %>"><%= product.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Cliente:</label>
+                      <select class="form-control" required name="client">
+                        <option value="" disabled selected>Cliente:</option>
+                        <% clients.forEach(function(client){ %>
+                          <option <% if ( event.client_id == client.id ) { %> selected <% } %> value="<%= client.id %>"><%= client.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Motivo da Ocorrência:</label>
+                      <select class="form-control" required name="motive">
+                        <option value="" disabled selected>Motivo:</option>
+                        <% event_issues.forEach(function(event_issue){ %>
+                          <option <% if ( event.event_issue_id == event_issue.id ) { %> selected <% } %> value="<%= event_issue.id %>"><%= event_issue.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Detalhamento:</label>
+                      <textarea class="form-control" name="observation"
+                        placeholder="Description"> <%= event.observation %></textarea>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Data da Ocorrência:</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text" class="form-control" value="<%= moment(event.date).format("DD/MM/YYYY")%>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask name="date_event">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                   </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Reposição:</label>
+                      <select class="form-control" name="reposition">
+                        <option <% if ( event.reposition=='0' ) { %> selected <% } %> value="0">Não</option>
+                        <option <% if ( event.reposition=='1' ) { %> selected <% } %> value="1">Sim</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Departamento:</label>
+                      <select class="form-control" required name="section">
+                        <option value="" disabled selected>Departamento:</option>
+                        <% sections.forEach(function(section){ %>
+                          <option <% if ( event.section_id == section.id ) { %> selected <% } %> value="<%= section.id %>"><%= section.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Responsável</label>
+                    <select class="form-control" required name="user">
+                      <option value="" disabled selected>Responsável:</option>
+                      <% users.forEach(function(user){ %>
+                        <option <% if ( event.user_id == user.id ) { %> selected <% } %> value="<%= user.id %>"><%= user.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+
+                <button class="btn btn-dark" type="submit">Atualizar</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <%- include("partials/footer") %>
+
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Departamento:</label>
+        <select class="select2" data-placeholder="Escolha o departamento" style="width: 100%;" name="section">
+          <% sections.forEach(function(section){ %>
+            <option value="<%= section.id %>">
+              <%= section.name %>
+            </option>
+            <% }) %>
+        </select>
+      </div>
+    </div>

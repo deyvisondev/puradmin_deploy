@@ -1,0 +1,134 @@
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  // $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js" integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- <script src="javascripts/charts.js"></script> -->
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Select 2 -->
+<script src="plugins/select2/js/select2.full.min.js"></script>
+
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="dist/js/demo.js"></script> -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+
+<script>
+  $('.select2').select2()
+</script>
+
+
+<script>
+  $(function () {
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    $('.select2').select2()
+})
+
+
+</script>
+
+
+<script>
+$(function () { 
+if($("#frm-add-category").length > 0) {
+  $("#frm-add-category").validate();
+}
+
+if($("#frm-add-book").length > 0) {
+  $("#frm-add-book").validate();
+}
+
+if($("#frm-add-user").length > 0) {
+  $("#frm-add-user").validate();
+}
+
+if($("#frm-issue-book").length > 0) {
+  $("#frm-issue-book").validate();
+}
+
+if($("#frm-return-book").length > 0) {
+  $("#frm-return-book").validate();
+}
+if($("#frm-user-create").length > 0) {
+  $("#frm-user-create").validate();
+}
+if($("#frm-event-create").length > 0) {
+  $("#frm-event-create").validate();
+}
+//add ajax request
+var app_url = "http://localhost:3000";
+
+$("#dd_category").on("change", function () {
+  var category_id = $(this).val();
+
+  var postdata = "cat_id=" + category_id;
+
+  $.post(app_url + "/admin/category-list-book", postdata, function (
+    response
+  ) {
+    var booksHtml = "<option value=''>Choose Book</option>";
+
+    $.each(response.books, function (index, item) {
+      booksHtml +=
+        '<option value="' + item.id + '">' + item.name + "</option>";
+    });
+
+    $("#dd_book_list").html(booksHtml);
+  });
+});
+
+$("#return-dd-user").on("change", function () {
+  var user_id = $(this).val();
+
+  var postdata = "user_id=" + user_id;
+
+  $.post(app_url + "/admin/user-list-book", postdata, function (
+    response
+  ) {
+    var booksHtml = "<option value=''>Choose Book</option>";
+
+    $.each(response.books, function (index, item) {
+      booksHtml +=
+        '<option value="' + item.bookId + '">' + item.Book.name + "</option>";
+    });
+
+    $("#return_dd_book").html(booksHtml);
+  });
+});
+
+})
+</script>

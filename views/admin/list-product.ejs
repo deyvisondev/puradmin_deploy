@@ -1,0 +1,109 @@
+
+    <%-  include("partials/header-datatable")  %>
+    
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Listagem dos Produtos Cadastrados</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Listagem dos Produtos Cadastrados</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Listagem dos Produtos Cadastrados</h3>
+            </div>
+
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-4">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Buscar por data de registro:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="far fa-calendar-alt"></i>
+                          </span>
+                        </div>
+                          <input type="text" class="form-control" id="datemask" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask="" inputmode="numeric" name="date">
+                          <a href="/admin/search-product" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</a>
+                      </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                  <!-- text input -->
+                  
+                </div>
+              </div>
+                <table id="tbl-list-category" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>Status</th>
+                      <th>Ações</tr>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% products.forEach(function(data){ %>
+                          <tr>
+                            <td><%= data.name %></td>
+                            <!-- <td><%= moment(data.created_at).format("DD/MM/YYYY") %></td> -->
+                            <td>
+                              <% if(data.status == '1'){ %>
+                                  <button class="btn btn-success">Ativo</button>
+                                <% }else{ %>
+                                  <button class="btn btn-danger">Inativo</button>
+                                  <% } %>
+                            </td>
+                            <td>
+                              <a href="/admin/edit-product/<%= data.id %>" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+                              
+                              <form method="post" action="/admin/delete-product" id="frm-delete-category-<%= data.id %>" style="display: inline;">
+
+                                <input type="hidden" value="<%= data.id %>" name="product_id">
+
+                              </form>
+
+                              <a href="javascript:void(0)" onclick="if(confirm('Tem certeza que vai deletar este registro?')){ $('#frm-delete-category-<%= data.id %>').submit() }" class="btn btn-danger"><i class="fa fa-trash"></i> Deletar</a>
+                            </td>
+                          </tr>
+                       <% }) %>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                          <th>Nome</th>
+                          <th>Status</th>
+                          <th>Ações</tr>
+                          </tr>
+                    </tfoot>
+                  </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ 
+    <%-  include("partials/footer-datatable")  %>

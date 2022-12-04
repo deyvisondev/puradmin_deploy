@@ -1,0 +1,127 @@
+
+    <%-  include("partials/header")  %>
+    
+    <style>
+      #frm-add-user label.error{
+        color: red;
+      }
+    </style>
+  
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Cadastrar Usuário</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Cadastrar Cliente</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+  
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-md-12">
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">Cadastrar Cliente</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="post" action="/admin/client-create" enctype="multipart/form-data" id="frm-user-create">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Nome:</label>
+                        <input required type="text" class="form-control" placeholder="Nome do Cliente" name="name" >
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <!-- text input -->
+                      <div class="form-group">
+                        <label>Morada:</label>
+                        <input required type="text" class="form-control" placeholder="Morada de descarga" name="address" >
+                      </div>
+                    </div>
+                   </div> 
+                   
+                   
+                   <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Email:</label>
+                          <input required type="text" class="form-control" placeholder="Email para contacto" name="email" >
+                        </div>
+                      </div>
+                   
+                   
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Telemóvel:</label>
+                            <input required type="text" class="form-control" data-inputmask="'mask': ['(+351) 999-999-999']" data-mask name="mobile">
+                          </div>
+                      </div>
+                    </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Responsavél:</label>
+                              <input required type="text" class="form-control" placeholder="Responsável para contacto" name="responsable" >
+                            </div>
+                          </div>
+                       
+                       
+                          <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Maps:</label>
+                              <input required type="text" class="form-control" placeholder="Coordenadas no Google Maps" name="maps" >
+                            </div>
+                          </div>
+                          </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <!-- text input -->
+                          <div class="form-group">
+                            <label>Foto:</label>
+                            <input type="file" name="image" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                              <label>Status:</label>
+                              <select class="form-control" name="status">
+                                <option value="1">Ativo</option>
+                                <option value="0">Inativo</option>
+                              </select>
+                            </div>
+                          </div>
+                      </div>
+                  
+                    <button class="btn btn-dark" type="submit">Enviar</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+  
+   
+      <%-  include("partials/footer")  %>

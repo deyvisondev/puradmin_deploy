@@ -1,0 +1,72 @@
+
+    <%-  include("partials/header")  %>
+
+    <style>
+      #frm-add-category label.error{
+        color: red;
+      }
+    </style>
+    
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Cadastrar Departamento</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="/admin/">Início</a></li>
+              <li class="breadcrumb-item active">Departamento</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Cadastrar Departamento</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form id="frm-add-category" name="frm-add-category" method="post" action="/admin/section-create">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Nome</label>
+                      <input required type="text" class="form-control" placeholder="Digite aqui o nome do produto" name="name" >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Selecionar status</label>
+                      <select class="form-control" name="status">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                  <button class="btn btn-dark" type="submit">Enviar</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ 
+    <%-  include("partials/footer")  %>

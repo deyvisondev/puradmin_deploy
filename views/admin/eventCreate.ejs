@@ -1,0 +1,146 @@
+
+    <%-  include("partials/header")  %>
+    
+    <style>
+      #frm-event-create label.error{
+        color: red;
+      }
+    </style>
+  
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Cadastrar Ocorrência</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Cadastrar Ocorrência</li>
+              </ol>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.content-header -->
+  
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-md-12">
+            <div class="card card-dark">
+              <div class="card-header">
+                <h3 class="card-title">Cadastrar Ocorrência</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <form method="post" action="/admin/event-create" id="frm-event-create">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Produto:</label>
+                        <select required class="select2" data-placeholder="Escolha o produto" style="width: 100%;" name="product">
+                                <% products.forEach(function(product){ %>
+                                  <option value="<%= product.id %>"><%= product.name %></option>
+                                <% }) %>
+                              </select>
+                            </div>
+                          </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label>Cliente:</label>
+                          <select required class="select2" data-placeholder="Escolha o cliente" style="width: 100%;" name="client">
+                                  <% clients.forEach(function(client){ %>
+                                    <option value="<%= client.id %>"><%= client.name %></option>
+                                  <% }) %>
+                                </select>
+                              </div>
+                            </div>
+                          </div> 
+                   
+                   
+                   <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Motivo:</label>
+                        <select required class="select2" data-placeholder="Escolha o motivo" style="width: 100%;" name="motive">
+                                <% issues.forEach(function(issue){ %>
+                                  <option value="<%= issue.id %>"><%= issue.name %></option>
+                                <% }) %>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <!-- text input -->
+                            <div class="form-group">
+                              <label>Detalhamento:</label>
+                              <textarea  required class="form-control" name="observation" placeholder="Insira detalhes da Ocorrência"></textarea>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label>Data da Ocorrência:</label>
+          
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                              </div>
+                              <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask name="date_event">
+                            </div>
+                            <!-- /.input group -->
+                          </div>
+                         </div> 
+                         <div class="col-sm-6">
+                          <div class="form-group">
+                            <label>Reposição:</label>
+                            <select required class="form-control" name="reposition">
+                              <option value="0">Não</option>
+                              <option value="1">Sim</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Departamento:</label>
+                            <select required class="select2" data-placeholder="Escolha o departamento" style="width: 100%;" name="section">
+                                    <% sections.forEach(function(section){ %>
+                                      <option value="<%= section.id %>"><%= section.name %></option>
+                                    <% }) %>
+                                  </select>
+                                </div>
+                              </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Responsável:</label>
+                              <select required class="select2" data-placeholder="Escolha o responsável" style="width: 100%;" name="user">
+                                      <% users.forEach(function(user){ %>
+                                        <option value="<%= user.id %>"><%= user.name %></option>
+                                      <% }) %>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div> 
+                  
+                    <button class="btn btn-dark" type="submit">Enviar</button>
+                </form>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+  
+   
+      <%-  include("partials/footer")  %>

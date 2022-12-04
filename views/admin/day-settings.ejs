@@ -1,0 +1,88 @@
+
+    <%-  include("partials/header-datatable")  %>
+    
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Day Settings</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Day Settings</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Day Settings</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form>
+
+                 <div class="row">
+  
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Day count value</label>
+                            <input type="number" min="1" class="form-control" name="day_count" placeholder="Enter days ">
+                        </select>
+                      </div>
+                    </div>
+                   </div> 
+
+                
+                  <button class="btn btn-dark" type="submit">Submit</button>
+              </form>
+
+              <div class="row" style="margin-top:30px;">
+                <div class="col-md-12">
+                    <table id="tbl-list-category" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Status</th>
+                          <th>Action</tr>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                              </tr>
+                        </tfoot>
+                      </table>
+              </div>
+              </div>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ 
+    <%-  include("partials/footer-datatable")  %>

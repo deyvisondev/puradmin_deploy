@@ -1,0 +1,72 @@
+
+    <%-  include("partials/header")  %>
+
+    <style>
+      #frm-add-category label.error{
+        color: red;
+      }
+    </style>
+    
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Editar Motivo de Ocorrência</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Editar Motivo de Ocorrência</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Editar Motivo de Ocorrência</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form id="frm-add-category" name="frm-add-category" method="post" action="/admin/event-issue-edit/<%= issue.id %>">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Nome</label>
+                      <input required value="<%= issue.name %>" type="text" class="form-control" placeholder="Inserir o nome do produto" name="name" >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Selecionar Status</label>
+                      <select class="form-control" name="status">
+                        <option <% if(issue.status == '1'){ %> selected <% } %> value="1">Ativo</option>
+                        <option <% if(issue.status == '0'){ %> selected <% } %> value="0">Inativo</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                  <button class="btn btn-dark" type="submit">Enviar</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ 
+    <%-  include("partials/footer")  %>
