@@ -8,7 +8,10 @@ const moment = require("moment")
 
 ///////////  RENDERIZAR PÁGINA PARA CADASTRAR MOTIVO DE OCORRÊNCIA ////////////
 const addIssue = asyncHandler (async(req, res) => {
-    res.render("admin/eventMotiveCreate")
+    res.render("admin/eventMotiveCreate", {
+        title: "Registar Tipos de Ocorrências - PURAdmin"
+    })
+    
 })
 
 
@@ -17,6 +20,7 @@ const addIssue = asyncHandler (async(req, res) => {
 const allIssueMotive = asyncHandler (async (req, res) => {
         const getIssues = await eventIssueModel.findAll();
         res.render("admin/eventMotiveList", {
+        title: "Listar Tipos de Ocorrências - PURAdmin",
         issues: getIssues
     });
 })

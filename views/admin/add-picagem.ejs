@@ -1,0 +1,160 @@
+<%- include("partials/header") %>
+
+  <style>
+    #frm-add-category label.error {
+      color: red;
+    }
+  </style>
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Cadastrar Picagem</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin/">Início</a></li>
+            <li class="breadcrumb-item active">Cadastrar Picagem</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Cadastrar Picagem</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form id="frm-add-category" name="frm-add-category" method="post" action="/admin/add-picagem">
+                <div class="row">
+                  <div class="col-sm-2">
+                    <div class="form-group">
+                      <label for="start">Data:</label>
+                      <div class="input-group">
+                        <input type="date" id="date" name="picagem_date" value="">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Picker:</label>
+                      <select required class="select2" data-placeholder="Escolha o responsável" style="width: 100%;"
+                        name="picker_id">
+                        <% pickers.forEach(function(user){ %>
+                          <option></option>
+                          <option value="<%= user.id %>">
+                            <%= user.name %>
+                          </option>
+                          <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Número de Picagem:</label>
+                      <input required type="number" class="form-control"
+                        placeholder="Digite aqui o quantidade de picagem" name="number">
+                    </div>
+                  </div>
+                </div>
+                <button class="btn btn-dark" type="submit">Enviar</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Últimas Picagens Cadastradas:</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table id="tbl-list-category" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Data</th>
+          <th>Picker</th>
+          <th>Picagens</th>
+          <th>Açoes</th>  
+        </tr>
+        </thead>
+        <tbody>
+            <% picagens.forEach(function(data){ %>
+              <tr>
+                <td>
+                  <%= moment(data.date).format("DD/MM/YY")  %>
+              </td>
+              <td>
+                <%= data.user.name  %>
+            </td>
+            <td>
+              <%= data.qt_picagem  %>
+          </td>
+                <td>
+                  <a href="/admin/edit-picagem/<%= data.id %>" class="btn btn-primary"><i class="fa fa-edit"></i> Editar</a>
+                  
+                  <form method="post" action="/admin/delete-picagem" id="frm-delete-category-<%= data.id %>" style="display: inline;">
+
+                    <input type="hidden" value="<%= data.id %>" name="picagem_id">
+
+                  </form>
+
+                  <a href="javascript:void(0)" onclick="if(confirm('Tem certeza que vai deletar este registro?')){ $('#frm-delete-category-<%= data.id %>').submit() }" class="btn btn-danger"><i class="fa fa-trash"></i> Deletar</a>
+                </td>
+              </tr>
+           <% }) %>
+        </tbody>
+        <tfoot>
+            <tr>
+              <th>Data</th>
+              <th>Picker</th>
+              <th>Picagens</th>
+              <th>Açoes</th> 
+              </tr>
+        </tfoot>
+      </table>
+
+
+
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <%- include("partials/footer") %>
+
+    <script>
+      var date = new Date();
+
+      var day = date.getDate();
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+
+      var today = year + "-" + month + "-" + day;
+
+
+      document.getElementById('date').value = today;
+    </script>

@@ -1,13 +1,24 @@
-const moment = require("moment")
-
-const date = new Date()
-const dateMoment = moment(date).subtract(7, 'days').format("YYYY-MM-DD")
-
-
-
-console.log(date)
-console.log(dateMoment)
-
-var d = new Date();
-d.setDate(d.getDate()-7);
-console.log(d.setHours(0, 0, 0, 0))
+const person = [
+    {
+      name: 'Jim',
+      color: 'blue',
+      age: 22,
+    },
+    {
+      name: 'Sam',
+      color: 'blue',
+      age: 33,
+    },
+    {
+      name: 'Eddie',
+      color: 'green',
+      age: 77,
+    },
+  ];
+  
+  // Add their sum of ages
+  const sumOfAges = person.reduce((sum, currentValue) => {
+    return sum + currentValue.age;
+  }, 0);
+  
+  console.log(sumOfAges);

@@ -27,6 +27,8 @@ var userRouter = require("./routes/userRouter")
 var eventIssueRouter = require("./routes/eventRouter")
 var clientRouter = require("./routes/clientRouter")
 var loginRouter = require("./routes/loginRouter")
+var picagemRouter = require("./routes/picagemRouter")
+var pickingDashboardRouter = require("./routes/pickingDashboardRouter")
 
 const RedisStore = connectRedis(session)
 redisClient.connect().catch(e => console.log('Não conectado', e))
@@ -80,6 +82,8 @@ app.use('/', sectionRouter);
 app.use('/', eventIssueRouter);
 app.use('/', clientRouter);
 app.use('/', loginRouter);
+app.use('/', picagemRouter);
+app.use('/', pickingDashboardRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

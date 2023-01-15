@@ -17,7 +17,8 @@ const addUser = asyncHandler (async (req, res) => {
         }
     })
     res.render("admin/userCreate", {
-        sections: sections
+        sections: sections,
+        title: "Criar Usuário - PURAdmin"
     });
 })
 
@@ -126,7 +127,8 @@ const allUser = asyncHandler (async (req, res) => {
     })
     res.render("admin/userList", {
         users: getUsers,
-        moment: moment
+        moment: moment,
+        title: "Lista de Usuários - PURAdmin"
     })
 })
 
@@ -228,7 +230,8 @@ const getUser = asyncHandler (async(req, res) =>{
     }).then((data) => {
         res.render("admin/userEdit", {
             user: data,
-            sections: sections
+            sections: sections,
+            title: "Editar Usuário - PURAdmin"
         })
     })
 })

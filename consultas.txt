@@ -32,3 +32,22 @@ console.log(uniqueObjects)
 data.push('<%= moment(date.date).format("DD/MM/YYYY") %>');
 quantidade.push('<%= date.count %>');
 '<% }); %>'
+
+
+
+
+SELECT "date", "user_id", COUNT(*)
+FROM "events"
+GROUP BY "date","user_id";
+
+    const eventsPerUser = await eventModel.findAll({     
+        group: ['date', 'user.name', 'user_id'],
+        attributes: ['date','user_id', [Sequelize.fn('COUNT', '*'), 'count']],
+        order: [[Sequelize.literal('date'), 'ASC']],
+        raw: true,
+        include: [{
+            model: userModel,
+            attributes: ['name']
+        }]
+    })
+    console.log(eventsPerUser)

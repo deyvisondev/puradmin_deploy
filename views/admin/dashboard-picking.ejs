@@ -1,0 +1,249 @@
+<%- include("partials/header") %>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Picking Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Picking Dashboard</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Picagens Diárias</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <label for="start">Início:</label>
+                <input type="date" id="start" name="date_start" onchange="startDateFilter(this)"
+                  value="<%= testando %>">
+                <label for="start">Fim:</label>
+                <input type="date" id="end" name="date_end" onchange="endDateFilter(this)" value="2022-11-26">
+                <canvas id="picagem_chart"
+                  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+      </div>
+
+
+      <script name="picagens_chart">
+
+        const data = [];
+        const picagensBrigth = [];
+        const picagensDaniel = [];
+        const picagensDeyvison = [];
+        const picagensEstevao = [];
+        const picagensEvandro = [];
+        const picagensFabio = [];
+        const picagensNelson = [];
+        const picagensRafael = [];
+        const picagensRicardo = [];
+        const picagensWallas = [];
+
+
+        //Dados recebidos do res.render na rota
+
+        '<% picagens.forEach(function(date, quant){ %>'
+
+        data.push('<%= date.date %>');
+        picagensBrigth.push('<%= date.bright %>');
+        picagensDaniel.push('<%= date.daniel; %>');
+        picagensDeyvison.push('<%= date.deyvison %>');
+        picagensEstevao.push('<%= date.estevao %>');
+        picagensEvandro.push('<%= date.evandro %>');
+        picagensFabio.push('<%= date.fabio %>');
+        picagensNelson.push('<%= date.nelson %>');
+        picagensRafael.push('<%= date.rafael %>');
+        picagensRicardo.push('<%= date.ricardo %>');
+        picagensWallas.push('<%= date.wallas %>');
+        '<% }); %>'
+  
+        var dt = new Date();
+        dt.setDate(dt.getDate() - 7);
+
+        const config = {
+          type: 'bar',
+          data: {
+            labels: data,
+            datasets: [{
+              label: 'Bright',
+              data: picagensBrigth,
+              backgroundColor: [
+                    'rgba(106, 90, 205)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Daniel',
+              data: picagensDaniel,
+              backgroundColor: [
+                    'rgba(112, 128, 144)',
+                ],
+              borderWidth: 1
+            },
+            {
+              label: 'Deyvison',
+              data: picagensDeyvison,
+              backgroundColor: [
+                    'rgba(0, 255, 255)',
+                ],
+              borderWidth: 1
+            },
+            {
+              label: 'Estevao',
+              data: picagensEstevao,
+              backgroundColor: [
+                    'rgba(72, 209, 204)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Evandro',
+              data: picagensEvandro,
+              backgroundColor: [
+                    'rgba(255, 0, 0)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Fabio',
+              data: picagensFabio,
+              backgroundColor: [
+                    'rgba(0, 255, 127)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Nelson',
+              data: picagensNelson,
+              backgroundColor: [
+                    'rgba(0, 100, 0)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Rafael',
+              data: picagensRafael,
+              backgroundColor: [
+                    'rgba(218, 165, 32)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Ricardo',
+              data: picagensRicardo,
+              backgroundColor: [
+                    'rgba(0, 0, 0)',
+                ],
+              borderWidth: 1
+            },{
+              label: 'Wallas',
+              data: picagensWallas,
+              backgroundColor: [
+                    'rgba(255, 20, 147)',
+                ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                min: dt.setHours(0, 0, 0, 0),
+                max: new Date(),
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: {
+                    day: 'dd/MM/yyyy'
+                  }
+                }
+              },
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        }
+
+
+        const myChart = new Chart(
+          document.getElementById('picagem_chart'),
+          config
+        );
+
+
+        function startDateFilter(date) {
+          const startDate = date.value
+          console.log(startDate)
+          myChart.options.scales.x.min = startDate
+          myChart.update()
+        }
+
+        function endDateFilter(date) {
+          const endDate = date.value
+          console.log(endDate)
+          myChart.options.scales.x.max = endDate
+          myChart.update()
+        }
+
+        var date = new Date();
+
+        var day = date.getDate();
+        var seven = (date.getDate() - 7);
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+        var sevendays = year + "-" + month + "-" + day
+
+        document.getElementById('end').value = today;
+
+
+        //Doughnut chart definido no canvas da página
+
+        //var ctx = document.getElementById('pie-chart').getContext('2d');
+      </script>
+
+
+
+
+
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <%- include("partials/footer") %>

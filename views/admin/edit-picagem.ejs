@@ -1,0 +1,86 @@
+
+    <%-  include("partials/header")  %>
+
+    <style>
+      #frm-add-category label.error{
+        color: red;
+      }
+    </style>
+    
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Editar Picagem</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Editar Picagem</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Editar Picagem</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form id="frm-add-category" name="frm-add-category" method="post" action="/admin/edit-picagem/<%= picagem.id %>">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label for="start">Data:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                        </div>
+                        <input type="text" class="form-control" value="<%= moment(picagem.date).format("DD/MM/YYYY")%>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask name="picagem_date">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Picker:</label>
+                      <select class="form-control" required name="picker_id">
+                        <option value="" disabled selected>Responsável:</option>
+                        <% users.forEach(function(user){ %>
+                          <option <% if ( picagem.user_id == user.id ) { %> selected <% } %> value="<%= user.id %>"><%= user.name %></option>
+                        <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Número de Picagem:</label>
+                      <input required type="number" class="form-control"
+                        placeholder="Digite aqui o quantidade de picagem" name="number" value="<%= picagem.qt_picagem %>">
+                    </div>
+                  </div>
+                </div>
+                  <button class="btn btn-dark" type="submit">Enviar</button>
+              </form>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+ 
+    <%-  include("partials/footer")  %>

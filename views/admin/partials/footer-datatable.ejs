@@ -1,12 +1,12 @@
 </div>
 <!-- /.content-wrapper -->
 <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="https://deyvison.dev">PURAdmin</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.2.0
-    </div>
-  </footer>
+  <strong>Copyright &copy; 2021-2022 <a href="https://deyvison.dev">PURAdmin</a>.</strong>
+  All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Version</b> 1.2.0
+  </div>
+</footer>
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -43,32 +43,45 @@
 <!-- <script src="dist/js/demo.js"></script> -->
 
 <script>
-   //Datemask dd/mm/yyyy
-   $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/aaaa' })
+  //Datemask dd/mm/yyyy
+  $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/aaaa' })
 </script>
 
 <!-- Page specific script -->
 <script>
-  $(function () {
-  
-      
-    $("#tbl-list-category").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#tbl-list-category_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
+$(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#tbl-list-category tfoot th').each(function () {
+        var title = $(this).text();
+        $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
     });
-  });
-  </script>
+ 
+    // DataTable
+    var table = $('#tbl-list-category').DataTable({
+      "scrollX": true,
+      "scrollCollapse": true,
+ 
+      "responsive": true, "lengthChange": true, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        initComplete: function () {
+            // Apply the search
+            this.api()
+                .columns()
+                .every(function () {
+                    var that = this;
+ 
+                    $('input', this.footer()).on('keyup change clear', function () {
+                        if (that.search() !== this.value) {
+                            that.search(this.value).draw();
+                        }
+                    });
+                });
+        },
+    }).buttons().container().appendTo('#tbl-list-category_wrapper .col-md-6:eq(0)');;
+});
+</script>
 
 
 </body>
-</html>
 
+</html>

@@ -1,0 +1,66 @@
+<script name="gráfico 1">
+
+const deyvisonevents = []
+const wallasevents = []
+const estevaoevents = []
+const ricardoevents = []
+const rafaelevents = []
+const evandroevents = []
+const brightevents = []
+const nelsonevents = []
+const danielevents = []
+const fabioevents = []
+const datesEventsPickers = []
+
+
+'<% allEventsPickers.forEach(function(date, deyvison, wallas){ %>'
+
+datesEventsPickers.push('<%= date.date %>');
+deyvisonevents.push('<%= date.ocorrenciasdeyvison %>');
+wallasevents.push('<%= date.ocorrenciaswallas %>');
+estevaoevents.push('<%= date.ocorrenciasestevao %>');
+ricardoevents.push('<%= date.ocorrenciasricardo %>');
+rafaelevents.push('<%= date.ocorrenciasrafael %>');
+evandroevents.push('<%= date.ocorrenciasevandro %>');
+brightevents.push('<%= date.ocorrenciasbrigth %>');
+nelsonevents.push('<%= date.ocorrenciasnelson %>');
+danielevents.push('<%= date.ocorrenciasdaniel %>');
+fabioevents.push('<%= date.ocorrenciasfabio %>');
+'<% }); %>'
+
+const configEvents = {
+  type: 'bar',
+  data: {
+    labels: datesEventsPickers,
+    datasets: [{
+      label: 'Deyvison',
+      data: deyvisonevents,
+      borderWidth: 1
+    },
+    {
+      label: 'Wallas',
+      data: wallasevents,
+      borderWidth: 1
+    },
+    {
+      label: 'Estevao',
+      data: estevaoevents,
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+};
+
+// render init block  
+const myChart2= new Chart(
+  document.getElementById('myChart'),
+  configEvents
+);
+
+</script>

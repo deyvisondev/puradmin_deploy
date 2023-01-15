@@ -12,7 +12,7 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- ChartJS -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js" integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- <script src="plugins/chart.js/Chart.min.js"></script> -->
 <!-- <script src="javascripts/charts.js"></script> -->
 <!-- Sparkline -->
 <script src="plugins/sparklines/sparkline.js"></script>
@@ -56,6 +56,26 @@
     $('[data-mask]').inputmask()
 
     $('.select2').select2()
+
+     //Date picker
+     $('#reservationdate').datetimepicker({
+        format: 'DD/MM/YYYY',
+        timePicker: true
+    });
+
+    //Date and time picker
+    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'dd/mm/yyyy'
+      }
+    })
 })
 
 

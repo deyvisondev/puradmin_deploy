@@ -10,7 +10,9 @@ const moment = require("moment")
 
 ////////////  RENDERIZAR PÁGINA PARA CADASTRAR PRODUTOS ////////////
 const addProduct = asyncHandler (async(req, res) => {
-    res.render("admin/add-product")
+    res.render("admin/add-product", {
+        title: "Registar Produto - PURAdmin"
+    })
 })
 
 
@@ -20,7 +22,8 @@ const allProducts = asyncHandler (async (req, res) => {
         const getProducts = await productModel.findAll();
         res.render("admin/list-product", {
         products: getProducts,
-        moment: moment
+        moment: moment,
+        title: "Lista de Produtos - PURAdmin"
     });
 })
 
@@ -71,7 +74,8 @@ const getProduct = asyncHandler (async(req, res) =>{
         }
     }).then((data) => {
         res.render("admin/edit-product", {
-            product: data
+            product: data,
+            title: "Editar Produto - PURAdmin"
         })
     })
 })

@@ -123,7 +123,7 @@
         <div class="col-md-6">
           <div class="card card-success">
             <div class="card-header">
-              <h3 class="card-title">Ocorrências Diárias no Picking</h3>
+              <h3 class="card-title">Ocorrências Diárias</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -136,6 +136,9 @@
             </div>
             <div class="card-body">
               <div class="chart">
+                <label for="start">Data:</label>
+                <input type="date" id="date_event" name="date_event" onchange="eventDateFilter(this)"
+                  value="<%= testando %>">
                 <canvas id="myChart"
                   style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
@@ -146,7 +149,7 @@
         <div class="col-md-6">
           <div class="card card-success">
             <div class="card-header">
-              <h3 class="card-title">Ocorrências Diárias por Departamento</h3>
+              <h3 class="card-title">Ocorrências por Departamento</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -159,7 +162,7 @@
             </div>
             <div class="card-body">
               <div class="chart">
-                <canvas id="pieChart"
+                <canvas id="chartsection"
                   style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
             </div>
@@ -172,7 +175,7 @@
         <div class="col-md-6">
           <div class="card card-success">
             <div class="card-header">
-              <h3 class="card-title">Ocorrências Diárias no Picking</h3>
+              <h3 class="card-title">Ocorrências Diárias</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -186,11 +189,10 @@
             <div class="card-body">
               <div class="chart">
                 <label for="start">Início:</label>
-                <input type="date" id="start" name="date_start" onchange="startDateFilter(this)" value="2022-11-15"
-                  min="2022-11-01" max="2022-11-30">
+                <input type="date" id="start" name="date_start" onchange="startDateFilter(this)"
+                  value="<%= testando %>">
                 <label for="start">Fim:</label>
-                <input type="date" id="end" name="date_end" onchange="endDateFilter(this)" value="2022-11-26"
-                  max="2022-11-26">
+                <input type="date" id="end" name="date_end" onchange="endDateFilter(this)" value="2022-11-26">
                 <canvas id="chart"
                   style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
               </div>
@@ -201,7 +203,7 @@
         <div class="col-md-6">
           <div class="card card-success">
             <div class="card-header">
-              <h3 class="card-title">Ocorrências Diárias por Departamento</h3>
+              <h3 class="card-title">Ocorrências Diárias</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -224,56 +226,182 @@
       </div>
 
 
+      <script name="gráfico 1">
 
-      <script>
-        const ctx = document.getElementById('myChart');
+        const deyvisonevents = []
+        const wallasevents = []
+        const estevaoevents = []
+        const ricardoevents = []
+        const rafaelevents = []
+        const evandroevents = []
+        const brightevents = []
+        const nelsonevents = []
+        const danielevents = []
+        const fabioevents = []
+        const datesEventsPickers = []
 
-        new Chart(ctx, {
+
+        '<% allEventsPickers.forEach(function(date, deyvison, wallas){ %>'
+
+        datesEventsPickers.push('<%= date.date %>');
+        deyvisonevents.push('<%= date.ocorrenciasdeyvison %>');
+        wallasevents.push('<%= date.ocorrenciaswallas %>');
+        estevaoevents.push('<%= date.ocorrenciasestevao %>');
+        ricardoevents.push('<%= date.ocorrenciasricardo %>');
+        rafaelevents.push('<%= date.ocorrenciasrafael %>');
+        evandroevents.push('<%= date.ocorrenciasevandro %>');
+        brightevents.push('<%= date.ocorrenciasbrigth %>');
+        nelsonevents.push('<%= date.ocorrenciasnelson %>');
+        danielevents.push('<%= date.ocorrenciasdaniel %>');
+        fabioevents.push('<%= date.ocorrenciasfabio %>');
+        '<% }); %>'
+
+        const configEvents = {
           type: 'bar',
           data: {
-            labels: ['Jorge', 'Estevão', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: datesEventsPickers,
             datasets: [{
-              label: 'Ocorrências',
-              data: [0, 2, 19, 3, 5, 2, 3],
+              label: 'Deyvison',
+              data: deyvisonevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Wallas',
+              data: wallasevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Estevao',
+              data: estevaoevents,
               borderWidth: 1
             }]
           },
           options: {
             scales: {
+              x: {
+                min: new Date(),
+                max: new Date(),
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: {
+                    day: 'dd/MM/yyyy'
+                  }
+                }
+              },
               y: {
                 beginAtZero: true
               }
             }
           }
-        });
+        };
 
-        const pie = document.getElementById('pieChart');
 
-        new Chart(pie, {
-          type: 'pie',
+        function eventDateFilter(date) {
+          const eventDate = date.value
+          console.log(eventDate)
+          myChart2.options.scales.x.min = eventDate
+          myChart2.options.scales.x.max = eventDate
+          myChart2.update()
+        }
+
+        var dateEvent = new Date();
+
+        // render init block  
+        const myChart2 = new Chart(
+          document.getElementById('myChart'),
+          configEvents
+        );
+
+        var date2 = new Date();
+
+        var day2 = date2.getDate();
+        var seven2 = (date2.getDate() - 7);
+        var month2 = date2.getMonth() + 1;
+        var year2 = date2.getFullYear();
+
+        if (month2 < 10) month2 = "0" + month2;
+        if (day2 < 10) day2 = "0" + day2;
+
+        var today2 = year2 + "-" + month2 + "-" + day2;
+        var sevendays2 = year2 + "-" + month2 + "-" + day2
+
+        document.getElementById('date_event').value = today2;
+
+      </script>
+
+      <script name="gráfico 2">
+
+
+        var dt3 = new Date();
+        dt3.setDate(dt3.getDate() - 7);
+
+        const pickingEvents = []
+        const atendimentoEvents = []
+        const distribuicaoEvents = []
+        const comprasEvents = []
+        const dates = []
+        const testandopush = []
+
+        '<% allEvents.forEach(function(date, picking, distribuicao){ %>'
+
+        dates.push('<%= date.date %>');
+        pickingEvents.push('<%= date.ocorrenciaspicking %>');
+        distribuicaoEvents.push('<%= date.ocorrenciasdistribuicao %>');
+        atendimentoEvents.push('<%= date.ocorrenciasatendimento %>');
+        '<% }); %>'
+
+        console.log(pickingEvents)
+        console.log(distribuicaoEvents)
+
+        const config5 = {
+          type: 'bar',
           data: {
-            labels: ['Jorge', 'Estevão', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+            labels: dates,
             datasets: [{
-              label: 'Ocorrências',
-              data: [0, '<%= clients %>', 19, 3, 5, 2, 3],
+              label: 'Picking',
+              data: pickingEvents,
+              borderWidth: 1
+            },
+            {
+              label: 'Distribuição',
+              data: distribuicaoEvents,
+              borderWidth: 1
+            },
+            {
+              label: 'Atendimento ao Cliente',
+              data: atendimentoEvents,
               borderWidth: 1
             }]
           },
           options: {
-
+            scales: {
+              x: {
+                min: dt3.setHours(0, 0, 0, 0),
+                max: new Date(),
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: {
+                    day: 'dd-MM-yyyy'
+                  }
+                }
+              },
+              y: {
+                beginAtZero: true
+              }
+            }
           }
-        });
+        }
 
+        // render init block  
+        const myChart5 = new Chart(
+          document.getElementById('chartsection'),
+          config5
+        );
+      </script>
 
-        //Variáveis que receberão os dados para popular o gráfico
-
-
-        // function calculateMin() {
-        //   const date = new Date()
-        //   const dateMoment = moment(date).subtract(7, 'days').format("YYYY-MM-DD")
-        //   console.log(dateMoment)
-        // }
-
+      <script name="gráfico 3">
 
         const data = [];
 
@@ -282,15 +410,15 @@
 
         //Dados recebidos do res.render na rota
 
-        ' <% eventsPerDay.forEach(function(date, count){ %>'
+        '<% eventsPerDay.forEach(function(date, count){ %>'
 
         data.push('<%= date.date %>');
         quantidade.push('<%= date.count %>');
         '<% }); %>'
 
         var dt = new Date();
-        dt.setDate(dt.getDate()-7); 
-        
+        dt.setDate(dt.getDate() - 7);
+
         const config = {
           type: 'bar',
           data: {
@@ -309,6 +437,9 @@
                 type: 'time',
                 time: {
                   unit: 'day',
+                  displayFormats: {
+                    day: 'dd/MM/yyyy'
+                  }
                 }
               },
               y: {
@@ -339,11 +470,26 @@
           myChart.update()
         }
 
+        var date = new Date();
+
+        var day = date.getDate();
+        var seven = (date.getDate() - 7);
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+        var sevendays = year + "-" + month + "-" + day
+
+        document.getElementById('end').value = today;
+
+
         //Doughnut chart definido no canvas da página
 
         //var ctx = document.getElementById('pie-chart').getContext('2d');
       </script>
-
 
 
 

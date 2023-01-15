@@ -58,7 +58,8 @@ const addEvent = asyncHandler(async (req, res) => {
         products: getProduct,
         issues: getIssue,
         sections: getSection,
-        users: getUser
+        users: getUser,
+        title: "Registar Ocorrências - PURAdmin"
     });
 })
 
@@ -118,7 +119,8 @@ const allEvents = asyncHandler(async (req, res) => {
     })
     res.render("admin/eventList", {
         events: getEvents,
-        moment: moment
+        moment: moment,
+        title: "Lista de Ocorrências - PURAdmin"
     })
 })
 
@@ -151,7 +153,8 @@ const getEvent = asyncHandler(async (req, res) => {
             products: products,
             event_issues: event_issues,
             clients: clients,
-            moment: moment
+            moment: moment,
+            title: "Editar Ocorrência - PURAdmin"
         })
     })
 })
