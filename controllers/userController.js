@@ -18,7 +18,7 @@ const addUser = asyncHandler (async (req, res) => {
     })
     res.render("admin/userCreate", {
         sections: sections,
-        title: "Criar Usuário - PURAdmin"
+        title: "Criar Usuário - Frutadmin"
     });
 })
 
@@ -60,7 +60,8 @@ const createUser = asyncHandler (async (req, res) => {
                     image: "/uploads/avatar.png",
                     date_hired: dateHired,  
                     status: req.body.status,
-                    password: hashPassword
+                    password: hashPassword,
+                    type_user: req.body.type_user
                 }).then((status) => {
                     if(status){
                         req.flash("success", "Usário cadastrado com sucesso")
@@ -128,7 +129,7 @@ const allUser = asyncHandler (async (req, res) => {
     res.render("admin/userList", {
         users: getUsers,
         moment: moment,
-        title: "Lista de Usuários - PURAdmin"
+        title: "Lista de Usuários - Frutadmin"
     })
 })
 
@@ -231,7 +232,7 @@ const getUser = asyncHandler (async(req, res) =>{
         res.render("admin/userEdit", {
             user: data,
             sections: sections,
-            title: "Editar Usuário - PURAdmin"
+            title: "Editar Usuário - Frutadmin"
         })
     })
 })

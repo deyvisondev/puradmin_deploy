@@ -1,0 +1,314 @@
+<%- include("partials/header") %>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Meu Picking Dashboard</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Meu Picking Dashboard</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Minhas Últimas Picagens</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <label for="start">Início:</label>
+                <input type="date" id="start" name="date_start" onchange="startDateFilter(this)"
+                  value="<%= testando %>">
+                <label for="start">Fim:</label>
+                <input type="date" id="end" name="date_end" onchange="endDateFilter(this)" value="2022-11-26">
+                <canvas id="picagem_chart"
+                  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Meu Desempenho Diário</h3>
+            </div>
+            <div class="card-body">
+              <p>Aqui você pode adicionar informações sobre o seu desempenho.</p>
+              <table id="tbl-list-category" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Desempenho</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% picagens.forEach(function(picagem){ %>
+                    <tr>
+                      <td>
+                        <%= moment(picagem.date).format("DD/MM/YY") %>
+                      </td>
+                      <td>
+                        Sua picagem foi de <%= picagem.total_picagens %>, que corresponde a <%= picagem.performance %>%
+                            do total de picagens diária.
+                      </td>
+                    </tr>
+                    <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Meu Desempenho</h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>
+                    <%= pickmensal %>
+                  </h3>
+
+                  <p>Picagens Mensal</p>
+                </div>
+                <div class="icon">
+                  <i class="ion"></i>
+                </div>
+                <a href="/admin/event-list" class="small-box-footer">Mais Informações <i
+                    class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>
+                    <%= ocmensal %>
+                  </h3>
+
+                  <p>Ocorrências Mensal</p>
+                </div>
+                <div class="icon">
+                  <i class="ion"></i>
+                </div>
+                <a href="/admin/client-list" class="small-box-footer">Mais Informações <i
+                    class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>
+                    <%= media %>
+                  </h3>
+
+                  <p>Racio de Ocorrências</p>
+                </div>
+                <div class="icon">
+                  <i class="ion"></i>
+                </div>
+                <a href="/admin/user-list" class="small-box-footer">Mais Informações <i
+                    class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-md-12">
+        <div class="card card-success">
+          <div class="card-header">
+            <h3 class="card-title">Minhas Ocorrências</h3>
+          </div>
+          <div class="card-body">
+            <p>Aqui você pode analisar suas últimas ocorrências.</p>
+            <table id="tbl-list-category" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Cliente</th>
+                  <th>Produto</th>
+                  <th>Motivo</th>
+                  <th>Observação</th>
+                  <th>Reposição</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% ocorrencias.forEach(function(ocorrencia){ %>
+                  <tr>
+                    <td>
+                      <%= moment(ocorrencia.date).format("DD/MM/YY") %>
+                    </td>
+                    <td>
+                      <%= ocorrencia.client.name %>
+                    </td>
+                    <td>
+                      <%= ocorrencia.Product.name %>
+                    </td>
+
+                    <td>
+                      <%= ocorrencia.event_issue.name %>
+                    </td>
+                    <td>
+                      <%= ocorrencia.observation %>
+                    </td>
+                    <td>
+                      <% if(ocorrencia.reposition=='0' ){ %>
+                        <button class="btn btn-success">Não</button>
+                        <% }else{ %>
+                          <button class="btn btn-danger">Sim</button>
+                          <% } %>
+                    </td>
+                  </tr>
+                  <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script name="picagens_chart">
+
+      const data = [];
+      const picagens = [];
+
+
+      //Dados recebidos do res.render na rota
+
+      '<% picagens.forEach(function(picagem){ %>'
+
+      data.push('<%= picagem.date %>');
+      picagens.push('<%= picagem.total_picagens %>');
+      '<% }); %>'
+      console.log(data)
+      var dt = new Date();
+      dt.setDate(dt.getDate() - 7);
+
+      const config = {
+        type: 'bar',
+        data: {
+          labels: data,
+          datasets: [{
+            label: 'Minhas Picagens',
+            data: picagens,
+            backgroundColor: [
+              'rgba(106, 90, 205)',
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              min: dt.setHours(0, 0, 0, 0),
+              max: new Date(),
+              type: 'time',
+              time: {
+                unit: 'day',
+                displayFormats: {
+                  day: 'dd/MM/yyyy'
+                }
+              }
+            },
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      }
+
+
+      const myChart = new Chart(
+        document.getElementById('picagem_chart'),
+        config
+      );
+
+
+      function startDateFilter(date) {
+        const startDate = date.value
+        console.log(startDate)
+        myChart.options.scales.x.min = startDate
+        myChart.update()
+      }
+
+      function endDateFilter(date) {
+        const endDate = date.value
+        console.log(endDate)
+        myChart.options.scales.x.max = endDate
+        myChart.update()
+      }
+
+      var date = new Date();
+
+      var day = date.getDate();
+      var seven = (date.getDate() - 7);
+      var month = date.getMonth() + 1;
+      var year = date.getFullYear();
+
+      if (month < 10) month = "0" + month;
+      if (day < 10) day = "0" + day;
+
+      var today = year + "-" + month + "-" + day;
+      var sevendays = year + "-" + month + "-" + day
+
+      document.getElementById('end').value = today;
+
+
+        //Doughnut chart definido no canvas da página
+
+        //var ctx = document.getElementById('pie-chart').getContext('2d');
+    </script>
+
+
+
+
+
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <%- include("partials/footer") %>

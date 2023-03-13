@@ -1,142 +1,157 @@
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-    <!-- Para mudar a cor da barra lateral -->
-    
-    <style> .sidebar-dark-primary{ background: #086608 !important; } </style>
+  <!-- Para mudar a cor da barra lateral -->
+
+  <style>
+    .sidebar-dark-primary {
+      background: #086608 !important;
+    }
+    .sidebar-dark .brand-link {
+      border-bottom: 1px solid #ffffff !important;
+    }
+  </style>
 
 
-    <!-- FIM : Para mudar a cor da barra lateral -->
+  <!-- FIM : Para mudar a cor da barra lateral -->
 
-    <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="dist/img/pura.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">PURADMIN</span>
-    </a>
+  <!-- Brand Logo -->
+  <a href="index3.html" class="brand-link">
+    <img src="dist/img/Frutadmin-Fav.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">FRUTADMIN</span>
+  </a>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">Deyvison Queiroz</a>
-        </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="<%= userData.image %>" class="img-circle elevation-2" alt="User Image">
       </div>
+      <div class="info">
+        <a href="#" class="d-block">
+          <%= userData.name %>
+        </a>
+      </div>
+    </div>
 
 
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-    
-            <li class="nav-item">
-                <a href="/admin" class="nav-link">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
-                  <p>
-                    Dashboard
-                  </p>
-                </a>
-            </li>
-            <!--  
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                    Category
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/admin/add-category" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Add Category</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/admin/list-category" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>List Category</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-            -->
-            <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-th"></i>
-                <p>
-                  Produtos
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/admin/add-product" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Adicionar Produtos</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="/admin/list-product" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Listar Produtos</p>
-                  </a>
-                </li>
-              </ul>
-          </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Clientes
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/client-create" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cadastrar Clientes</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/client-list" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar Clientes</p>
-                </a>
-              </li>
-            </ul>
+        <li class="nav-item">
+          <a href="/admin" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>
+              Dashboard
+            </p>
+          </a>
         </li>
 
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Departamentos
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/section-create" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Adicionar Departamento</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/section-list" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listar Departamentos</p>
-                </a>
-              </li>
-            </ul>
+        <li class="nav-item">
+          <a href="/admin/date-daily-dashboard" class="nav-link" id="dashboard-diario">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Dashboard Diário</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Produtos
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/add-product" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Adicionar Produtos</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/list-product" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar Produtos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Faturação
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/add-daily-billing" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Cadastrar Faturação Diária</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/daily-billing-dashboard" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard de Faturação</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Clientes
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/client-create" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Cadastrar Clientes</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/client-list" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar Clientes</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Departamentos
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/section-create" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Adicionar Departamento</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/section-list" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar Departamentos</p>
+              </a>
+            </li>
+          </ul>
         </li>
 
         <li class="nav-item">
@@ -161,194 +176,88 @@
               </a>
             </li>
           </ul>
-      </li>
+        </li>
 
 
-      <li class="nav-item">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-th"></i>
-          <p>
-            Ocorrências
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="/admin/event-create" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Adicionar Ocorrência</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/admin/event-list" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Listar Ocorrências</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/admin/event-issue-create" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Motivos de Ocorrências</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/admin/event-issue-list" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Listar Motivos de Ocorrências</p>
-            </a>
-          </li>
-        </ul>
-    </li>
-
-
-    <li class="nav-item">
-      <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-th"></i>
-        <p>
-          Picking
-          <i class="right fas fa-angle-left"></i>
-        </p>
-      </a>
-      <ul class="nav nav-treeview">
         <li class="nav-item">
-          <a href="/admin/add-picagem" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Cadastrar Picagens</p>
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Ocorrências
+              <i class="right fas fa-angle-left"></i>
+            </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/event-create" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Adicionar Ocorrência</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/event-list" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar Ocorrências</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/event-issue-create" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Motivos de Ocorrências</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/event-issue-list" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Listar Motivos de Ocorrências</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Picking
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/add-picagem" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Cadastrar Picagens</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/dashboard-picking" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard - Picking</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/my-dashboard" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Meu Dashboard</p>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item">
-          <a href="/admin/dashboard-picking" class="nav-link">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Dashboard - Picking</p>
+          <a href="/admin/teste-req" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              Teste
+              <i class="right fas fa-angle-left"></i>
+            </p>
           </a>
         </li>
       </ul>
-  </li>
-        <!--
+    </nav>
 
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-edit"></i>
-                  <p>
-                    Book
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/admin/add-book" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Add Book</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/admin/list-book" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>List Book</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-users"></i>
-                  <p>
-                    Users
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/admin/add-user" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Add User</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/admin/list-user" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>List User</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
-                  <p>
-                    Issue Management
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/admin/issue-book" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Issue a Book</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/admin/issue-history" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Issue History</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
-                  <p>
-                    Return Management
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/admin/return-a-book" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Return a Book</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/admin/return-list-book" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Return History</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-cog"></i>
-                  <p>
-                    Settings
-                    <i class="right fas fa-angle-left"></i>
-                  </p>
-                </a>
-                <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                    <a href="/admin/currency-settings" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Currency Settings</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="/admin/days-settings" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Day Settings</p>
-                    </a>
-                  </li>
-                </ul>
-            </li>
--->
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-    </div>
-    <!-- /.sidebar -->
-  </aside>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

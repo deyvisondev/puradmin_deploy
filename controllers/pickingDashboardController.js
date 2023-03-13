@@ -24,63 +24,88 @@ const dashboard = asyncHandler(async (req, res) => {
 
 
 
-        const picagemBrigth = await sequelize.query(
-            `SELECT date, qt_picagem AS "bright" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '30' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemDaniel = await sequelize.query(
-            `SELECT date, qt_picagem AS "daniel" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '34' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemDeyvison = await sequelize.query(
-            `SELECT date, qt_picagem AS "deyvison" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '25' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemEstevao = await sequelize.query(
-            `SELECT date, qt_picagem AS "estevao" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '20' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemEvandro = await sequelize.query(
-            `SELECT date, qt_picagem AS "evandro" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '31' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemFabio = await sequelize.query(
-            `SELECT date, qt_picagem AS "fabio" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '33' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemNelson = await sequelize.query(
-            `SELECT date, qt_picagem AS "nelson" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '35' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemRafael = await sequelize.query(
-            `SELECT date, qt_picagem AS "rafael" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '29' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemRicardo = await sequelize.query(
-            `SELECT date, qt_picagem AS "ricardo" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '28' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
-        const picagemWallas = await sequelize.query(
-            `SELECT date, qt_picagem AS "wallas" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '32' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
-            { type: QueryTypes.SELECT });
+        // const picagemBrigth = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "bright" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '30' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemDaniel = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "daniel" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '34' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemDeyvison = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "deyvison" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '25' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemEstevao = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "estevao" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '20' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemEvandro = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "evandro" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '31' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemFabio = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "fabio" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '33' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemNelson = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "nelson" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '35' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemRafael = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "rafael" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '29' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemRicardo = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "ricardo" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '28' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
+        // const picagemWallas = await sequelize.query(
+        //     `SELECT date, qt_picagem AS "wallas" FROM "picagens" AS "picagem" WHERE "picagem"."user_id" = '32' GROUP BY "picagem"."date", "picagem"."qt_picagem"`,
+        //     { type: QueryTypes.SELECT });
         
         
 
-        const mapPicagens = new Map();
-        picagemBrigth.forEach(item => mapPicagens.set(item.date, item));
-        picagemDaniel.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemDeyvison.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemEstevao.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemEvandro.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemFabio.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemNelson.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemRafael.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemRicardo.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
-        picagemWallas.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // const mapPicagens = new Map();
+        // picagemBrigth.forEach(item => mapPicagens.set(item.date, item));
+        // picagemDaniel.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemDeyvison.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemEstevao.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemEvandro.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemFabio.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemNelson.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemRafael.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemRicardo.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
+        // picagemWallas.forEach(item => mapPicagens.set(item.date, {...mapPicagens.get(item.date), ...item}));
 
-        const mergedArrPicagens = Array.from(mapPicagens.values());
+        // const mergedArrPicagens = Array.from(mapPicagens.values());
         
-        console.log(JSON.stringify(mergedArrPicagens));
+        // console.log(JSON.stringify(mergedArrPicagens));
+
+
+        const picagensTotal = await sequelize.query(
+            `SELECT 
+                date,
+                SUM(CASE WHEN user_id = 30 THEN qt_picagem ELSE 0 END) AS "bright",
+                SUM(CASE WHEN user_id = 34 THEN qt_picagem ELSE 0 END) AS "daniel",
+                SUM(CASE WHEN user_id = 25 THEN qt_picagem ELSE 0 END) AS "deyvison",
+                SUM(CASE WHEN user_id = 20 THEN qt_picagem ELSE 0 END) AS "estevao",
+                SUM(CASE WHEN user_id = 31 THEN qt_picagem ELSE 0 END) AS "evandro",
+                SUM(CASE WHEN user_id = 33 THEN qt_picagem ELSE 0 END) AS "fabio",
+                SUM(CASE WHEN user_id = 35 THEN qt_picagem ELSE 0 END) AS "nelson",
+                SUM(CASE WHEN user_id = 29 THEN qt_picagem ELSE 0 END) AS "rafael",
+                SUM(CASE WHEN user_id = 28 THEN qt_picagem ELSE 0 END) AS "ricardo",
+                SUM(CASE WHEN user_id = 32 THEN qt_picagem ELSE 0 END) AS "wallas"
+            FROM picagens
+            WHERE user_id IN (30, 34, 25, 20, 31, 33, 35, 29, 28, 32)
+            GROUP BY date
+            ORDER BY date DESC`, // adicionando cláusula ORDER BY
+            { type: QueryTypes.SELECT });
+        
+        console.log(picagensTotal);
             
+
+
+    
 
 
     res.render("admin/dashboard-picking", {
         
         moment: moment,
-        title: "Picking Dashboard - Puradmin",
+        title: "Picking Dashboard - Frutadmin",
         testando: testando,
-        picagens: mergedArrPicagens
+        picagens: picagensTotal
     })
 })
 

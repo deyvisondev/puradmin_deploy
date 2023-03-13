@@ -1,0 +1,402 @@
+<%- include("partials/header") %>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Dashboard da Faturação</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard da Faturação</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Faturação Prevista x Faturação Efetiva</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <label for="start">Início:</label>
+                <input type="date" id="start" name="date_start" onchange="startDateFilter(this)"
+                  value="<%= testando %>">
+                <label for="start">Fim:</label>
+                <input type="date" id="end" name="date_end" onchange="endDateFilter(this)" value="2022-11-26">
+                <canvas id="faturacao_chart"
+                  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-success">
+            <div class="card-header">
+              <h3 class="card-title">Fatuação Diária Completa</h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="chart">
+                <label for="start">Data:</label>
+                <input type="date" id="date_event" name="date_event" onchange="eventDateFilter(this)"
+                  value="<%= testando %>">
+                <canvas id="faturacao_chart2"
+                  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Últimas Faturações Diárias Cadastradas:</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table id="tbl-list-category" class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Data da Faturação</th>
+            <th>Faturação Prevista</th>
+            <th>Faturação Efetiva</th>
+            <th>Quebras</th>
+            <th>Nota de Crédito</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% billing_data.forEach(function(data){ %>
+            <tr>
+              <td>
+                <%= moment(data.date_billing).format("DD/MM/YYYY") %> 
+              </td>
+              <td>
+                <%= Number(data.expected_billing).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %>€ 
+              </td>
+              <td>
+                <%= Number(data.effective_billing).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %>€
+              </td>
+              <td>
+                <%= Number(data.daily_lost).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %>€ <b>(<%= (data.percent_daily_lost).toFixed(2) %>%)</b> 
+              </td>
+              <td>
+                <%= Number(data.credit_note).toLocaleString('pt-BR', { minimumFractionDigits: 2 }) %>€  <b>(<%= (data.percent_credit_note).toFixed(2) %>%)</b> 
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Data da Faturação</th>
+            <th>Faturação Prevista</th>
+            <th>Faturação Efetiva</th>
+            <th>Quebras</th>
+            <th>Nota de Crédito</th>
+          </tr>
+        </tfoot>
+      </table>
+
+
+
+
+
+
+      <script name="dados_chart">
+
+        const data = [];
+        const billingExpected = [];
+        const billingEffective = [];
+        const dailyLosts = [];
+        const creditNotes = [];
+
+      </script>
+
+      <script name="faturacao_chart">
+
+        //Dados recebidos do res.render na rota
+        '<% billing_data.forEach(function(date, quant){ %>'
+        data.push('<%= moment(date.date_billing).format("YYYY-MM-DD") %>');
+        billingExpected.push('<%= date.expected_billing %>');
+        billingEffective.push('<%= date.effective_billing %>');
+        dailyLosts.push('<%= date.daily_lost %>');
+        creditNotes.push('<%= date.credit_note %>');
+        '<% }); %>'
+
+
+        var dt = new Date();
+        dt.setDate(dt.getDate() - 7);
+
+
+        const config = {
+          type: 'line',
+          data: {
+            labels: data,
+            datasets: [{
+              label: 'Faturação Prevista',
+              data: billingExpected,
+              fill: false,
+              pointColor: '#3b8bba',
+              pointStrokeColor: 'rgba(60,0,188,1)',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(60,141,188,1)',
+              backgroundColor: 'rgba(24,17,246,0.5)',
+              tension: 0.4,
+              borderWidth: 6,
+              borderColor: 'rgba(24,17,246,1'
+            },
+            {
+              label: 'Faturação Efetiva',
+              data: billingEffective,
+              fill: false,
+              pointColor: 'rgba(210, 214, 222, 1)',
+              pointStrokeColor: '#c1c7d1',
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(246, 246, 246, 0)',
+              backgroundColor: 'rgba(8, 102, 8, 0.5)',
+              tension: 0.4,
+              borderWidth: 6,
+              borderColor: 'rgba(8, 102, 8, 1)',
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                min: dt.setHours(0, 0, 0, 0),
+                max: new Date(),
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: {
+                    day: 'dd/MM/yyyy'
+                  }
+                }
+              },
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        }
+
+
+
+        const myChart = new Chart(
+          document.getElementById('faturacao_chart'),
+          config
+        );
+
+
+        function startDateFilter(date) {
+          const startDate = date.value
+          console.log(startDate)
+          myChart.options.scales.x.min = startDate
+          myChart.update()
+        }
+
+        function endDateFilter(date) {
+          const endDate = date.value
+          console.log(endDate)
+          myChart.options.scales.x.max = endDate
+          myChart.update()
+        }
+
+        var date = new Date();
+
+        var day = date.getDate();
+        var seven = (date.getDate() - 7);
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;
+        var sevendays = year + "-" + month + "-" + day
+
+        document.getElementById('end').value = today;
+
+
+        //Doughnut chart definido no canvas da página
+
+        //var ctx = document.getElementById('pie-chart').getContext('2d');
+      </script>
+
+
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"
+        integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+      <script name="faturacao_chart2">
+        var dt = new Date();
+        dt.setDate(dt.getDate() - 7);
+
+
+        const config2 = {
+          type: 'bar',
+          data: {
+            labels: data,
+            datasets: [{
+              label: 'Faturação Prevista',
+              data: billingExpected,
+              backgroundColor: [
+                'rgba(38, 70, 234)',
+              ],
+              borderWidth: 1,
+              datalabels: {
+                anchor: 'end',
+                align: 'end'
+              }
+            }, {
+              label: 'Faturação Efetiva',
+              data: billingEffective,
+              backgroundColor: [
+                'rgba(8, 102, 8)',
+              ],
+              borderWidth: 1,
+              datalabels: {
+                anchor: 'end',
+                align: 'end'
+              }
+            },
+            {
+              label: 'Quebras',
+              data: dailyLosts,
+              backgroundColor: [
+                'rgba(244, 17, 17)',
+              ],
+              borderWidth: 1,
+              datalabels: {
+                anchor: 'end',
+                align: 'end'
+              }
+            },
+            {
+              label: 'Notas de Crédito',
+              data: creditNotes,
+              backgroundColor: [
+                'rgba(48, 42, 42)',
+              ],
+              borderWidth: 1,
+              datalabels: {
+                anchor: 'end',
+                align: 'end'
+              }
+            }]
+          },
+          options: {
+            scales: {
+              x: {
+                min: new Date(),
+                max: new Date(),
+                type: 'time',
+                time: {
+                  unit: 'day',
+                  displayFormats: {
+                    day: 'dd/MM/yyyy'
+                  }
+                }
+              },
+              y: {
+                beginAtZero: true,
+              }
+            },
+
+
+          },
+          plugins: [ChartDataLabels]
+        };
+
+
+        function eventDateFilter(date) {
+          const eventDate = date.value
+          console.log(eventDate)
+          myChart2.options.scales.x.min = eventDate
+          myChart2.options.scales.x.max = eventDate
+          myChart2.update()
+        }
+
+        var dateEvent = new Date();
+
+        const myChart2 = new Chart(
+          document.getElementById('faturacao_chart2'),
+          config2
+        );
+
+        var date2 = new Date();
+
+        var day2 = date2.getDate();
+        var seven2 = (date2.getDate() - 7);
+        var month2 = date2.getMonth() + 1;
+        var year2 = date2.getFullYear();
+
+        if (month2 < 10) month2 = "0" + month2;
+        if (day2 < 10) day2 = "0" + day2;
+
+        var today2 = year2 + "-" + month2 + "-" + day2;
+        var sevendays2 = year2 + "-" + month2 + "-" + day2
+
+        document.getElementById('date_event').value = today2;
+      </script>
+
+
+
+
+
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <%- include("partials/footer") %>

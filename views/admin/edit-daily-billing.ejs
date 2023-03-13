@@ -1,0 +1,134 @@
+
+<%-  include("partials/header")  %>
+
+<style>
+  #frm-add-category label.error{
+    color: red;
+  }
+</style>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Editar Faturação Diária</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Editar Faturação Diária</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12">
+      <div class="card card-dark">
+        <div class="card-header">
+          <h3 class="card-title">Editar Faturação Diária</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <form id="frm-add-category" name="frm-add-category" method="post" action="/admin/edit-daily-billing/<%= daily_billings.id %>">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                      <label>Data da Faturação:</label>
+                      <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                        <input type="text"  value="<%= moment(daily_billings.date_billing).format("DD/MM/YYYY")%>" class="form-control" data-inputmask-alias="datetime"
+                          data-inputmask-inputformat="dd/mm/yyyy" data-mask name="date_billing">
+                      </div>
+                    </div>
+                    <!-- /.input group -->
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="preco">Faturação Prevista:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">€</span>
+                        </div>
+                        <input type="text" id="value_billing" name="expected_billing" class="form-control preco"
+                          placeholder="Digite o valor em €"   value="<%= daily_billings.expected_billing %>" required>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="preco">Faturação Realizada:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">€</span>
+                        </div>
+                        <input type="text" id="value_billing" name="effective_billing" class="form-control preco"
+                          placeholder="Digite o valor em €" value="<%= daily_billings.effective_billing %>" required>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="preco">Quebras:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">€</span>
+                        </div>
+                        <input type="text" id="value_billing" name="daily_lost" class="form-control preco"
+                          placeholder="Digite o valor em €" value="<%= daily_billings.daily_lost %>" required>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="preco">Notas de Crédito:</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">€</span>
+                        </div>
+                        <input type="text" id="preco1" name="credit_note" class="form-control preco"
+                          placeholder="Digite o valor em €" value="<%= daily_billings.credit_note %>" required>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+              <button class="btn btn-dark" type="submit">Enviar</button>
+          </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+<script>
+    document.querySelectorAll('.preco').forEach(function (input) {
+      input.addEventListener('blur', function (e) {
+        // Remove todos os caracteres não numéricos e converte para um número com duas casas decimais
+        var valor = Number(e.target.value.replace(/[^0-9.,]+/g, "").replace(",", ".").replace(/(\..*)\./g, "$1"));
+        // Formata o valor com separador de milhares '.' e separador de centavos ','
+        var valorFormatado = valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+        // Atualiza o valor do campo com a formatação
+        e.target.value = valorFormatado;
+      });
+    });
+  </script>
+
+
+<%-  include("partials/footer")  %>

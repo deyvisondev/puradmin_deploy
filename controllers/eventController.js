@@ -59,7 +59,7 @@ const addEvent = asyncHandler(async (req, res) => {
         issues: getIssue,
         sections: getSection,
         users: getUser,
-        title: "Registar Ocorrências - PURAdmin"
+        title: "Registar Ocorrências - Frutadmin"
     });
 })
 
@@ -120,7 +120,7 @@ const allEvents = asyncHandler(async (req, res) => {
     res.render("admin/eventList", {
         events: getEvents,
         moment: moment,
-        title: "Lista de Ocorrências - PURAdmin"
+        title: "Lista de Ocorrências - Frutadmin"
     })
 })
 
@@ -154,7 +154,7 @@ const getEvent = asyncHandler(async (req, res) => {
             event_issues: event_issues,
             clients: clients,
             moment: moment,
-            title: "Editar Ocorrência - PURAdmin"
+            title: "Editar Ocorrência - Frutadmin"
         })
     })
 })

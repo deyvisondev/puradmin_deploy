@@ -1,139 +1,172 @@
+<%- include("partials/header") %>
 
-    <%-  include("partials/header")  %>
-    
-    <style>
-      #frm-add-user label.error{
-        color: red;
-      }
-    </style>
-  
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1 class="m-0">Cadastrar Usuário</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Cadastrar Usuário</li>
-              </ol>
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-  
-      <!-- Main content -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-md-12">
-            <div class="card card-dark">
-              <div class="card-header">
-                <h3 class="card-title">Cadastrar Usuário</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <form method="post" action="/admin/user-create" enctype="multipart/form-data" id="frm-user-create">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Nome:</label>
-                        <input required type="text" class="form-control" placeholder="Nome completo" name="name" >
-                      </div>
-                    </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Email:</label>
-                        <input required type="text" class="form-control" placeholder="Email para contacto" name="email" >
-                      </div>
-                    </div>
-                   </div> 
-                   
-                   
-                   <div class="row">
-                    <div class="col-sm-6">
+  <style>
+    #frm-add-user label.error {
+      color: red;
+    }
+  </style>
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Cadastrar Usuário</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+            <li class="breadcrumb-item active">Cadastrar Usuário</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Cadastrar Usuário</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <form method="post" action="/admin/user-create" enctype="multipart/form-data" id="frm-user-create">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
                     <div class="form-group">
-                      <label>Telemóvel:</label>
- 
-                          <input required type="text" class="form-control" data-inputmask="'mask': ['(+351) 999-999-999', '+099 99 99 9999[9]-9999']" data-mask name="mobile">
- 
-                      <!-- /.input group -->
+                      <label>Nome:</label>
+                      <input required type="text" class="form-control" placeholder="Nome completo" name="name">
                     </div>
                   </div>
-                   
-                   
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Email:</label>
+                      <input required type="text" class="form-control" placeholder="Email para contacto" name="email">
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Telemóvel:</label>
+                      <input required type="text" class="form-control" data-inputmask="'mask': ['(+351) 999-999-999']"
+                        data-mask name="mobile">
+                    </div>
+                  </div>
+
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Departamento:</label>
-                      <select class="select2" data-placeholder="Escolha o departamento" style="width: 100%;" name="section">
-                              <% sections.forEach(function(section){ %>
-                                <option value="<%= section.id %>"><%= section.name %></option>
-                              <% }) %>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
+                      <select class="select2" data-placeholder="Escolha o departamento" style="width: 100%;"
+                        name="section">
+                        <option></option>
+                        <% sections.forEach(function(section){ %>
+                          <option value="<%= section.id %>">
+                            <%= section.name %>
+                          </option>
+                          <% }) %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
 
-                      <div class="row">
-                        <div class="col-sm-6">
-                          <!-- text input -->
-                          <div class="form-group">
-                            <label>Foto:</label>
-                            <input type="file" name="image" class="form-control">
-                          </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                      <label>Foto:</label>
+                      <input type="file" name="image" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group">
+                      <label>Data de Admissão:</label>
+                      <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                         </div>
-                        <div class="col-sm-6">
-                        <div class="form-group">
-                          <label>Data de Adminissão:</label>
-        
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                            </div>
-                            <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask name="date_hired">
-                          </div>
-                          <!-- /.input group -->
-                        </div>
-                       </div> 
-                      </div>
-  
-                      <div class="row">
-                     
-                      <div class="col-sm-6">
-                      <div class="form-group">
-                        <label>Status:</label>
-                        <select class="form-control" name="status">
-                          <option value="1">Ativo</option>
-                          <option value="0">Inativo</option>
-                        </select>
+                        <input type="text" class="form-control" data-inputmask-alias="datetime"
+                          data-inputmask-inputformat="dd/mm/yyyy" data-mask name="date_hired">
                       </div>
                     </div>
-                    <div class="col-sm-6">
-                      <!-- text input -->
-                      <div class="form-group">
-                        <label>Password:</label>
-                        <input required type="text" class="form-control" placeholder="Senha de acesso" name="password">
+                    <!-- /.input group -->
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Status:</label>
+                      <select class="form-control" name="status">
+                        <option value="1">Ativo</option>
+                        <option value="0">Inativo</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Password:</label>
+                      <div class="input-group">
+                        <input required type="password" class="form-control" placeholder="Senha de acesso"
+                          name="password" id="password">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  
-                    <button class="btn btn-dark" type="submit">Enviar</button>
-                </form>
-              </div>
-              <!-- /.card-body -->
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label>Nível de Permissão:</label>
+                      <select class="form-control" name="type_user">
+                        <option value="1">Administrador</option>
+                        <option value="2">Picker - Team Leader</option>
+                        <option value="3">Picker</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="btn btn-dark" type="submit">Enviar</button>
+              </form>
             </div>
+            <!-- /.card-body -->
           </div>
-          </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </section>
-      <!-- /.content -->
-  
-   
-      <%-  include("partials/footer")  %>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+
+
+  <script>
+    var passwordInput = document.getElementById('password');
+    var togglePasswordButton = document.getElementById('togglePassword');
+
+    togglePasswordButton.addEventListener('click', function () {
+      var type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      this.querySelector('i').classList.toggle('fa-eye');
+      this.querySelector('i').classList.toggle('fa-eye-slash');
+    });
+  </script>
+
+
+  <%- include("partials/footer") %>

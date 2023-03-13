@@ -1,0 +1,98 @@
+<%- include("partials/header") %>
+
+  <style>
+    #frm-add-category label.error {
+      color: red;
+    }
+  </style>
+
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Buscar Dados de um Faturação Diária</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin/">Início</a></li>
+            <li class="breadcrumb-item active">Buscar Dados de um Faturação Diária</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-dark">
+            <div class="card-header">
+              <h3 class="card-title">Buscar Dados de um Faturação Diária</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <form action="/admin/dashboard-billing-date" method="GET">
+                      <label for="date-billing">Data:</label>
+                      <div class="input-group date" id="reservationdate" data-target-input="nearest">
+                        <input type="text" class="form-control" data-inputmask-alias="datetime"
+                          data-inputmask-inputformat="dd/mm/yyyy" data-mask name="date_billing" id="date-billing">
+                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                      </div>
+                  </div>
+                  <!-- /.input group -->
+                </div>
+              </div>
+              <button type="submit">Buscar</button>
+              </form>
+
+            </div>
+            <!-- /.card-body -->
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div><!-- /.container-fluid -->
+
+  </section>
+  <!-- /.content -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+
+    var dateInput = document.querySelector('input[name="date_billing"]');
+
+    // Adiciona o evento keydown na entrada de data
+    dateInput.addEventListener('keydown', function (event) {
+      // Verifica se a tecla "O" foi pressionada
+      if (event.key === 'o' || event.key === 'O') {
+        // Define a data de ontem
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        // Atualiza a data selecionada no datepicker
+        $('#reservationdate').datetimepicker('date', yesterday);
+      }
+      // Verifica se a tecla "H" foi pressionada
+      else if (event.key === 'h' || event.key === 'H') {
+        // Define a data de hoje
+        var today = new Date();
+
+        // Atualiza a data selecionada no datepicker
+        $('#reservationdate').datetimepicker('date', today);
+      }
+    });
+
+  </script>
+
+
+  <%- include("partials/footer") %>

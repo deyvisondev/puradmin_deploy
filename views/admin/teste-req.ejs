@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Busca de valores por data</title>
+</head>
+<body>
+  <h1>Busca de valores por data</h1>
+
+  <form action="/admin/teste-res" method="GET">
+    <label for="date-billing">Data:</label>
+    <input type="text" id="date-billing" name="date_billing" data-inputmask-alias="datetime"
+           data-inputmask-inputformat="dd/mm/yyyy" data-mask>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+  <script>
+    const dateInput = document.getElementById('date-billing');
+    const searchButton = document.getElementById('search-button');
+
+    searchButton.addEventListener('click', function() {
+      const dateValue = moment(dateInput.value, 'DD/MM/YYYY').format('YYYY-MM-DD');
+
+      // Redirecionar para a rota do Express com a data como parâmetro de consulta
+      window.location.href = `/admin/teste-req?date=${dateValue}`;
+    });
+  </script> -->
+</body>
+
+
+
+</html>
+

@@ -7,7 +7,7 @@ const clientModel = require("../models").client
 ////////////  RENDERIZAR PÁGINA PARA CADASTRAR CLIENTE ////////////
 const addClient = asyncHandler (async (req, res) => {
     res.render("admin/clientCreate", {
-        title: "Registar Cliente - PURAdmin"
+        title: "Registar Cliente - Frutadmin"
     });
 })
 
@@ -97,7 +97,7 @@ const allClient = asyncHandler (async (req, res) => {
     })
     res.render("admin/clientList", {
         clients: getClients,
-        title: "Lista de Clientes - PURAdmin"
+        title: "Lista de Clientes - Frutadmin"
     })
 })
 
@@ -201,7 +201,7 @@ const getClient =  asyncHandler (async(req, res) =>{
     }).then((data) => {
         res.render("admin/clientEdit", {
             data: data,
-            title: "Editar Cliente - PURAdmin"
+            title: "Editar Cliente - Frutadmin"
         })
     })
 })

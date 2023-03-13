@@ -225,7 +225,7 @@
         </div>
       </div>
 
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js" integrity="sha512-JPcRR8yFa8mmCsfrw4TNte1ZvF1e3+1SdGMslZvmrzDYxS69J7J49vkFL8u6u8PlPJK+H3voElBtUCzaXj+6ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script name="gráfico 1">
 
         const deyvisonevents = []
@@ -274,7 +274,43 @@
               label: 'Estevao',
               data: estevaoevents,
               borderWidth: 1
-            }]
+            },
+            {
+              label: 'Ricardo',
+              data: ricardoevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Rafael',
+              data: rafaelevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Evandro',
+              data: evandroevents,
+              borderWidth: 1
+            }, 
+            {
+              label: 'Bright',
+              data: brightevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Nelson',
+              data: nelsonevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Daniel',
+              data: danielevents,
+              borderWidth: 1
+            },
+            {
+              label: 'Fábio',
+              data: fabioevents,
+              borderWidth: 1
+            },
+          ]
           },
           options: {
             scales: {
@@ -292,8 +328,11 @@
               y: {
                 beginAtZero: true
               }
-            }
-          }
+            },
+            
+
+          },
+          plugins: [ChartDataLabels]
         };
 
 

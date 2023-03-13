@@ -9,7 +9,7 @@ const moment = require("moment")
 ///////////  RENDERIZAR PÁGINA PARA CADASTRAR DEPARTAMENTOS ////////////
 const addSection = asyncHandler (async(req, res) => {
     res.render("admin/sectionCreate", {
-        title: "Criar Departamento - PURAdmin"
+        title: "Criar Departamento - Frutadmin"
     })
 })
 
@@ -21,7 +21,7 @@ const allSection = asyncHandler (async (req, res) => {
         res.render("admin/sectionList", {
         sections: getSection,
         moment: moment,
-        title: "Lista de Departamentos - PURAdmin"
+        title: "Lista de Departamentos - Frutadmin"
     });
 })
 
@@ -126,7 +126,7 @@ const getSection = asyncHandler (async(req, res) =>{
     }).then((data) => {
         res.render("admin/sectionEdit", {
             section: data,
-            title: "Editar Departamento - PURAdmin"
+            title: "Editar Departamento - Frutadmin"
         })
     })
 })

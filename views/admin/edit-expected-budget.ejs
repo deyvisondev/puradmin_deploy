@@ -1,0 +1,95 @@
+
+<%-  include("partials/header")  %>
+
+<style>
+  #frm-add-category label.error{
+    color: red;
+  }
+</style>
+
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1 class="m-0">Editar Orçamento Previsto</h1>
+      </div><!-- /.col -->
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Editar Orçamento Previsto</li>
+        </ol>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+      <div class="col-md-12">
+      <div class="card card-dark">
+        <div class="card-header">
+          <h3 class="card-title">Editar Orçamento Previsto</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+          <form id="frm-add-category" name="frm-add-category" method="post" action="/admin/edit-expected-budget/<%= expecteds.id %>">
+            <div class="row">
+              <div class="col-sm-4">
+                <!-- text input -->
+                <div class="form-group">
+                  <label for="start">Data:</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <input type="text" class="form-control" value="<%= moment(expecteds.date_expected).format("DD/MM/YYYY")%>" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask name="expected_date">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Valor Previsto:</label>
+                  <input type="text" class="form-control" placeholder="Digite aqui o valor previsto para este dia"
+                    name="expected_budget">
+
+                  <script>
+                    const input = document.querySelector('input[name="expected_budget"]');
+                    input.addEventListener('input', function () {
+                      input.value = input.value.replace(/[^\d\.]/g, '').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+                    });
+                    input.addEventListener('blur', function () {
+                      const value = parseFloat(input.value.replace(/[^\d\.]/g, ''));
+                      if (!isNaN(value)) {
+                        input.value = value.toLocaleString('en-US', { style: 'currency', currency: 'EUR' });
+                      } else {
+                        input.value = '';
+                      }
+                    });
+
+                    document.querySelector('form').addEventListener('submit', function (event) {
+                      const value = parseFloat(input.value.replace(/[^\d\.]/g, ''));
+                      input.value = value;
+                    });
+                  </script>
+                </div>
+              </div>
+            </div>
+              <button class="btn btn-dark" type="submit">Enviar</button>
+          </form>
+        </div>
+        <!-- /.card-body -->
+      </div>
+    </div>
+    </div>
+    <!-- /.row -->
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+
+
+<%-  include("partials/footer")  %>

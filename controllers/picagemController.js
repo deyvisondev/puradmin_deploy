@@ -18,10 +18,11 @@ const addPicagem = asyncHandler(async (req, res) => {
 
     const getPicagens = await picagemModel.findAll({
         include: [{
-            model: userModel,
-            attributes: ["name"]
-        }]
-    });
+          model: userModel,
+          attributes: ["name"]
+        }],
+        order: [["date", "DESC"]]
+      });
 
     var getPickers = await sequelize.query(
         `SELECT "id", "name", "email", "mobile", "section_id", "image", "date_hired", "status", "password", "created_at" AS "createdAt", "updated_at" AS "updatedAt", "section_id" AS "sectionId" FROM "users" AS "users" WHERE "users"."section_id" = '1' ORDER BY "name"`,
@@ -41,12 +42,14 @@ const addPicagem = asyncHandler(async (req, res) => {
     res.render("admin/add-picagem", {
         pickers: getPickers,
         picagens: getPicagens,
-        title: "Registar Picagens - PURAdmin",
+        title: "Registar Picagens - Frutadmin",
         today: today,
-        title: "Picagens - PURAdmin",
+        title: "Picagens - Frutadmin",
         moment: moment
     })
 })
+
+
 
 
 
@@ -104,7 +107,7 @@ const getPicagem = asyncHandler (async(req, res) =>{
         res.render("admin/edit-picagem", {
             users: users,
             picagem: data,
-            title: "Editar Picagem - PURAdmin",
+            title: "Editar Picagem - Frutadmin",
             moment: moment
         })
     })
@@ -140,8 +143,7 @@ const editPicagem = asyncHandler (async (req, res) => {
 
                 res.redirect("/admin/edit-picagem/" + req.params.picagemId)
             })
-        }
-    )
+        })
 
 
 ////////////  EXCLUIR UMA PICAGEM ////////////

@@ -13,14 +13,8 @@ var flash = require("express-flash");
 var session = require("express-session");
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/adminRouter');
-var categoryRouter = require('./routes/category');
-var bookRouter = require('./routes/book');
 //var userRouter = require('./routes/user');
-var issueBookRouter = require('./routes/issuebook');
-var returnBookRouter = require('./routes/returnbook');
-var settingsRouter = require('./routes/settings');
 var productRouter = require("./routes/productRouter")
 var sectionRouter = require("./routes/sectionRouter")
 var userRouter = require("./routes/userRouter")
@@ -29,6 +23,10 @@ var clientRouter = require("./routes/clientRouter")
 var loginRouter = require("./routes/loginRouter")
 var picagemRouter = require("./routes/picagemRouter")
 var pickingDashboardRouter = require("./routes/pickingDashboardRouter")
+var dailyBillingRouter = require("./routes/dailyBillingRouter")
+var dailyBillingDashboardRouter = require("./routes/dailyBillingDashboardRouter")
+var testeRouter = require("./routes/testeRouter")
+var myDashboardRouter = require("./routes/myDashboardRouter")
 
 const RedisStore = connectRedis(session)
 redisClient.connect().catch(e => console.log('Não conectado', e))
@@ -69,13 +67,7 @@ app.use("/admin/:any",express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 app.use('/', adminRouter);
-app.use('/', categoryRouter);
-app.use('/', bookRouter);
-app.use('/', issueBookRouter);
-app.use('/', returnBookRouter);
-app.use('/', settingsRouter);
 app.use('/', productRouter);
 app.use('/', userRouter);
 app.use('/', sectionRouter);
@@ -83,7 +75,11 @@ app.use('/', eventIssueRouter);
 app.use('/', clientRouter);
 app.use('/', loginRouter);
 app.use('/', picagemRouter);
-app.use('/', pickingDashboardRouter)
+app.use('/', pickingDashboardRouter);
+app.use('/', dailyBillingRouter)
+app.use('/', dailyBillingDashboardRouter)
+app.use('/', testeRouter)
+app.use('/', myDashboardRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
