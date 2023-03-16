@@ -1,44 +1,156 @@
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 <script src="plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
 <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  // $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js" integrity="sha512-tQYZBKe34uzoeOjY9jr3MX7R/mo7n25vnqbnrkskGr4D6YOoPYSpyafUAzQVjV6xAozAqUFIEFsCO4z8mnVBXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-<!-- <script src="plugins/chart.js/Chart.min.js"></script> -->
-<!-- <script src="javascripts/charts.js"></script> -->
-<!-- Sparkline -->
 <script src="plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
 <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
 <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
 <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
 <script src="plugins/moment/moment.min.js"></script>
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Select 2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
-
-<!-- Tempusdominus Bootstrap 4 -->
 <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
 <script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
 <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<!-- <script src="dist/js/demo.js"></script> -->
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/adminlte.min.js"></script>
 <script src="dist/js/pages/dashboard.js"></script>
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+      // Setup - add a text input to each footer cell
+      $('#tbl-list-category tfoot th').each(function () {
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+      });
+   
+      // DataTable
+      var table = $('#tbl-list-category').DataTable({
+        "scrollX": true,
+        "scrollCollapse": true,
+   
+        "responsive": true, "lengthChange": true, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+          initComplete: function () {
+              // Apply the search
+              this.api()
+                  .columns()
+                  .every(function () {
+                      var that = this;
+   
+                      $('input', this.footer()).on('keyup change clear', function () {
+                          if (that.search() !== this.value) {
+                              that.search(this.value).draw();
+                          }
+                      });
+                  });
+          },
+      }).buttons().container().appendTo('#tbl-list-category_wrapper .col-md-6:eq(0)');;
+  });
+  </script>
+
+<script>
+  $(document).ready(function () {
+      // Setup - add a text input to each footer cell
+      $('#tbl-list-billing tfoot th').each(function () {
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+      });
+   
+      // DataTable
+      var table = $('#tbl-list-billing').DataTable({
+        "scrollX": true,
+        "scrollCollapse": true,
+   
+        "responsive": true, "lengthChange": true, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "columnDefs": [
+            {
+                "targets": [0], // índice da coluna "Data de Faturação"
+                "render": function (data, type, row) {
+                    // Formata a data para o formato YYYY-MM-DD
+                    return moment(data, "DD/MM/YYYY").format("YYYY-MM-DD");
+                }
+            }
+        ],
+          initComplete: function () {
+              // Apply the search
+              this.api()
+                  .columns()
+                  .every(function () {
+                      var that = this;
+   
+                      $('input', this.footer()).on('keyup change clear', function () {
+                          if (that.search() !== this.value) {
+                              that.search(this.value).draw();
+                          }
+                      });
+                  });
+          },
+      }).buttons().container().appendTo('#tbl-list-category_wrapper .col-md-6:eq(0)');;
+  });
+  </script>
+
+
+<script>
+  $(document).ready(function () {
+      // Setup - add a text input to each footer cell
+      $('#tbl-list-picking tfoot th').each(function () {
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+      });
+   
+      // DataTable
+      var table = $('#tbl-list-picking').DataTable({
+        "scrollX": true,
+        "scrollCollapse": true,
+   
+        "responsive": true, "lengthChange": true, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "columnDefs": [
+            {
+                "targets": [0], // índice da coluna "Data de Faturação"
+                "render": function (data, type, row) {
+                    // Formata a data para o formato YYYY-MM-DD
+                    return moment(data, "DD/MM/YYYY").format("YYYY-MM-DD");
+                }
+            }
+        ],
+          initComplete: function () {
+              // Apply the search
+              this.api()
+                  .columns()
+                  .every(function () {
+                      var that = this;
+   
+                      $('input', this.footer()).on('keyup change clear', function () {
+                          if (that.search() !== this.value) {
+                              that.search(this.value).draw();
+                          }
+                      });
+                  });
+          },
+      }).buttons().container().appendTo('#tbl-list-category_wrapper .col-md-6:eq(0)');;
+  });
+  </script>
+
+
 
 <script>
   $('.select2').select2()

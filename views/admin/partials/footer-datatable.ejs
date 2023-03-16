@@ -82,6 +82,49 @@ $(document).ready(function () {
 </script>
 
 
+<script>
+  $(document).ready(function () {
+      // Setup - add a text input to each footer cell
+      $('#tbl-list-events tfoot th').each(function () {
+          var title = $(this).text();
+          $(this).html('<input type="text" placeholder="Buscar por ' + title + '" />');
+      });
+   
+      // DataTable
+      var table = $('#tbl-list-events').DataTable({
+        "scrollX": true,
+        "scrollCollapse": true,
+   
+        "responsive": true, "lengthChange": true, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        "columnDefs": [
+              {
+                  "targets": [0], // índice da coluna "Data de Faturação"
+                  "render": function (data, type, row) {
+                      // Formata a data para o formato YYYY-MM-DD
+                      return moment(data, "DD/MM/YYYY").format("YYYY-MM-DD");
+                  }
+              }
+          ],
+          initComplete: function () {
+              // Apply the search
+              this.api()
+                  .columns()
+                  .every(function () {
+                      var that = this;
+   
+                      $('input', this.footer()).on('keyup change clear', function () {
+                          if (that.search() !== this.value) {
+                              that.search(this.value).draw();
+                          }
+                      });
+                  });
+          },
+      }).buttons().container().appendTo('#tbl-list-events_wrapper .col-md-6:eq(0)');;
+  });
+  </script>
+
+
 </body>
 
 </html>

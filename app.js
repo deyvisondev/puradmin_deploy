@@ -27,6 +27,8 @@ var dailyBillingRouter = require("./routes/dailyBillingRouter")
 var dailyBillingDashboardRouter = require("./routes/dailyBillingDashboardRouter")
 var testeRouter = require("./routes/testeRouter")
 var myDashboardRouter = require("./routes/myDashboardRouter")
+var netflixRouter = require("./routes/netflixRouter")
+
 
 const RedisStore = connectRedis(session)
 redisClient.connect().catch(e => console.log('Não conectado', e))
@@ -80,6 +82,7 @@ app.use('/', dailyBillingRouter)
 app.use('/', dailyBillingDashboardRouter)
 app.use('/', testeRouter)
 app.use('/', myDashboardRouter)
+app.use('/', netflixRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

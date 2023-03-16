@@ -94,7 +94,6 @@ const myLastPickings = asyncHandler(async (req, res) => {
   const mediaPicagens = allPicagens / allEvents
   const mediaArredondada = Math.round(mediaPicagens)
 
-  console.log(mediaArredondada)
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -109,11 +108,8 @@ const myLastPickings = asyncHandler(async (req, res) => {
     type: QueryTypes.SELECT,
     replacements: { userId, currentYear, currentMonth }
   });
-
-  console.log(MounthEvents)
-
   const count = parseInt(MounthEvents[0].count);
-  console.log(count);
+  
 
 
   const MounthPickings = await sequelize.query(`
@@ -126,11 +122,43 @@ const myLastPickings = asyncHandler(async (req, res) => {
     type: QueryTypes.SELECT,
     replacements: { userId, currentYear, currentMonth }
   });
+ const totalPicagem = parseInt(MounthPickings[0].total_picagem);
 
-  console.log(MounthPickings)
+ const mediaPicagensMensal = totalPicagem / count
+ const mediaArredondadaMensal = Math.round(mediaPicagensMensal)
+ console.log(mediaArredondadaMensal)
 
-  const totalPicagem = parseInt(MounthPickings[0].total_picagem);
-  console.log(totalPicagem);
+
+
+
+
+
+
+
+
+
+ const eventYear = await sequelize.query(`
+ SELECT COUNT(*) FROM events
+ WHERE user_id = :userId
+ AND extract(year from date) = :currentYear;
+`, {
+   type: QueryTypes.SELECT,
+   replacements: { userId, currentYear }
+ });
+ const countEventYear = parseInt(eventYear[0].count);
+
+
+ const pickingYear = await sequelize.query(`
+ SELECT SUM(qt_picagem) AS year_picagem
+ FROM picagens
+ WHERE user_id = :userId
+ AND extract(year from date) = :currentYear;    
+`, {
+   type: QueryTypes.SELECT,
+   replacements: { userId, currentYear }
+ });
+
+ const yearPicagem = parseInt(pickingYear[0].year_picagem);
 
 
 
@@ -144,7 +172,10 @@ const myLastPickings = asyncHandler(async (req, res) => {
     testando: testando,
     ocmensal: count,
     media: mediaArredondada,
-    pickmensal: totalPicagem
+    pickmensal: totalPicagem,
+    ocanual: countEventYear,
+    pickinganual: yearPicagem,
+    mediamensal: mediaArredondadaMensal
   })
 })
 

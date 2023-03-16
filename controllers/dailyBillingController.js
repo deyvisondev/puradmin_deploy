@@ -143,12 +143,43 @@ const editDailyBilling = asyncHandler(async (req, res) => {
 })
 
 ////////////  EXCLUIR UMA FATURAÇÃO ////////////
-
+const deleteBilling = asyncHandler (async (req, res) => {
+    await dailyBillingModel.findOne({
+        where:{
+            id:{
+                [op.eq]: req.body.daily_billing_id
+            }
+        }
+    }).then((data) => {
+        if(data){
+            //we have data on the basis of the given id
+            dailyBillingModel.destroy({
+                where:{
+                    id:{
+                        [op.eq]: req.body.daily_billing_id
+                    }
+                }
+            }).then((status) => {
+                if(status){
+                    //delete
+                    req.flash("success", "Faturação Diária excluída com sucesso.")
+                }else{
+                    //not delete
+                    req.flash("error", "Erro ao excluir Faturação Diária. Por favor entre em contato com o administrador do sistema.")
+                }
+                res.redirect("/admin/add-daily-billing")
+            })
+        }else{
+    
+        }
+    })
+})
 
 
 module.exports = {
     addDailyBilling,
     createDailyBilling,
     getDailyBilling,
-    editDailyBilling
+    editDailyBilling,
+    deleteBilling
 }

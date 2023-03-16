@@ -1,113 +1,114 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pura Admin - Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pura Admin - Login</title>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-<link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
 
-<link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
-<link rel="stylesheet" href="/dist/css/adminlte.min.css?v=3.2.0">
+  <link rel="stylesheet" href="/dist/css/adminlte.min.css?v=3.2.0">
 
 
-<style>
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-  }
-  
-  .img_cap {
-    display: block;
-    margin: 0 auto;
-    width: 50rem;
-  }
-
-  @media screen and (max-width: 768px) {
-    .img_cap {
-      max-width: 80%;
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 10vh;
     }
-  }
 
-  @media screen and (max-width: 480px) {
     .img_cap {
-      max-width: 100%;
+      display: block;
+      margin: 0 auto;
+      width: 50rem;
     }
-  }
 
+    @media screen and (max-width: 768px) {
+      .img_cap {
+        max-width: 80%;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .img_cap {
+        max-width: 100%;
+      }
+    }
   </style>
 
 <body class="hold-transition login-page">
 
-    <div class="container_img_cap">
-        <img class="img_cap" src="dist/img/work_office.png" alt="">
+  <div class="container_img_cap">
+    <img class="img_cap" src="dist/img/work_office.png" alt="">
+  </div>
+
+  <div class="login-box">
+    <div class="login-logo">
+      <a href="javascript:void(0)"><b>FRUT</b>ADMIN</a>
+    </div>
+
+    <div class="card">
+      <div class="card-body login-card-body">
+
+
+
+        <% if(messages.success){} if (messages.error){ %>
+          <div class="alert alert-danger">
+            <%= messages.error %>
+          </div>
+          <% } %>
+
+
+
+            <p class="login-box-msg">Inseria seu e-mail e password para entrar</p>
+            <form action="/login" method="post" id="frm-admin-login">
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" name="email" placeholder="Email">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+                <div class="input-group-append">
+                  <div class="input-group-text">
+                    <span class="fas fa-lock"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+
+                <div class="col-4">
+                  <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                </div>
+
+              </div>
+            </form>
+
+            <p class="mb-1">
+              <a href="/under-construction">Esqueci minha password</a>
+            </p>
       </div>
 
-<div class="login-box">
-<div class="login-logo">
-<a href="javascript:void(0)"><b>FRUT</b>ADMIN</a>
-</div>
-
-<div class="card">
-<div class="card-body login-card-body">
-
-    
-
-    <%  if(messages.success){} if (messages.error){ %>
-        <div class="alert alert-danger">
-            <%= messages.error %> 
-        </div>
-    <%  }  %>
+    </div>
+  </div>
 
 
+  <script src="plugins/jquery/jquery.min.js"></script>
 
-<p class="login-box-msg">Inseria seu e-mail e password para entrar</p>
-<form action="/login" method="post" id="frm-admin-login">
-<div class="input-group mb-3">
-<input type="email" class="form-control" name="email" placeholder="Email">
-<div class="input-group-append">
-<div class="input-group-text">
-<span class="fas fa-envelope"></span>
-</div>
-</div>
-</div>
-<div class="input-group mb-3">
-<input type="password" class="form-control" name="password" placeholder="Password">
-<div class="input-group-append">
-<div class="input-group-text">
-<span class="fas fa-lock"></span>
-</div>
-</div>
-</div>
-<div class="row">
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-
-<div class="col-4">
-<button type="submit" class="btn btn-primary btn-block">Entrar</button>
-</div>
-
-</div>
-</form>
-
-<p class="mb-1">
-<a href="forgot-password.html">Esqueci minha password</a>
-</p>
-</div>
-
-</div>
-</div>
-
-
-<script src="plugins/jquery/jquery.min.js"></script>
-
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<script src="dist/js/adminlte.min.js?v=3.2.0"></script>
+  <script src="dist/js/adminlte.min.js?v=3.2.0"></script>
 </body>
+
 </html>

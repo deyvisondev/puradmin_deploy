@@ -42,7 +42,7 @@
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-
+          
         <li class="nav-item">
           <a href="/admin" class="nav-link">
             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -68,13 +68,13 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="/admin/add-product" class="nav-link">
+              <a href="/admin/add-product" class="nav-link" data-id="add-produto">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Adicionar Produtos</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/admin/list-product" class="nav-link">
+              <a href="/admin/list-product" class="nav-link" data-id="edit-produto">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Listar Produtos</p>
               </a>
@@ -234,26 +234,33 @@
             <li class="nav-item">
               <a href="/admin/dashboard-picking" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard - Picking</p>
+                <p>Desempenho Geral Diário</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/get-picker" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Desempenho Geral por Picker</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/admin/my-dashboard" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Meu Dashboard</p>
+                <p>Meu Desempenho</p>
               </a>
             </li>
           </ul>
         </li>
+
         <li class="nav-item">
-          <a href="/admin/teste-req" class="nav-link">
-            <i class="nav-icon fas fa-th"></i>
+          <a href="/admin/netflix" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
             <p>
-              Teste
-              <i class="right fas fa-angle-left"></i>
+              Netflix
             </p>
           </a>
         </li>
+
       </ul>
     </nav>
 
@@ -261,3 +268,4 @@
   </div>
   <!-- /.sidebar -->
 </aside>
+

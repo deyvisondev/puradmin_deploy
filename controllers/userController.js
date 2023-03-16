@@ -165,6 +165,7 @@ const editUser = asyncHandler (async (req, res) => {
                     mobile: req.body.mobile,
                     section_id: req.body.section, 
                     status: req.body.status,
+                    type_user: req.body.type_user
                 }, {
                     where:{
                         id: req.params.user_id
@@ -190,6 +191,7 @@ const editUser = asyncHandler (async (req, res) => {
                 section_id: req.body.section,
                 image: "/uploads/" + image_attr.name,  
                 status: req.body.status,
+                type_user: req.body.type_user
             }, {
                 where:{
                     id: req.params.user_id

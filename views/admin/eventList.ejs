@@ -35,14 +35,14 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                  <table id="tbl-list-category" class="table table-bordered table-striped">
+                  <table id="tbl-list-events" class="table table-bordered table-striped">
                       <thead>
                       <tr>
+                        <th>Data</th>
                         <th>Cliente</th>
                         <th>Produto</th>
                         <th>Motivo</th>
                         <th>Observação</th>
-                        <th>Data</th>
                         <th>Reposição</th>
                         <th>Departamento</th>
                         <th>Responsável</th>
@@ -52,6 +52,9 @@
                       <tbody>
                             <% events.forEach(function(event){ %>
                           <tr>
+                            <td>
+                              <%= moment(event.date).format("DD/MM/YYYY")  %>
+                          </td>
                             <td>
                                 <%= event.client.name  %>
                             </td>
@@ -64,9 +67,6 @@
                             </td>
                              <td>
                                 <%= event.observation  %>
-                            </td>
-                            <td>
-                                <%= moment(event.date).format("DD/MM/YY")  %>
                             </td>
                             <td>
                                 <% if(event.reposition == '0'){ %>
@@ -95,11 +95,11 @@
                       </tbody>
                       <tfoot>
                           <tr>
+                            <th>Data</th>
                             <th>Cliente</th>
                             <th>Produto</th>
                             <th>Motivo</th>
                             <th>Observação</th>
-                            <th>Data</th>
                             <th>Reposição</th>
                             <th>Departamento</th>
                             <th>Responsável</th>

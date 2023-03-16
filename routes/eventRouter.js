@@ -22,11 +22,11 @@ router.post("/admin/event-delete/", redirecLogin, getUserData, deleteEvent)
 
 
 // Issues
-router.get("/admin/event-issue-list", allIssueMotive)
-router.get("/admin/event-issue-create", addIssue)
-router.post("/admin/event-issue-create", createIssue)
-router.get("/admin/event-issue-edit/:issue_id", getIssue)
-router.post("/admin/event-issue-edit/:issue_id", editIssue )
-router.post("/admin/event-issue-delete", deleteIssue)
+router.get("/admin/event-issue-list", redirecLogin, getUserData, allIssueMotive)
+router.get("/admin/event-issue-create", redirecLogin, getUserData, addIssue)
+router.post("/admin/event-issue-create", redirecLogin, getUserData, createIssue)
+router.get("/admin/event-issue-edit/:issue_id", redirecLogin, getUserData, getIssue)
+router.post("/admin/event-issue-edit/:issue_id", redirecLogin, getUserData, editIssue )
+router.post("/admin/event-issue-delete", redirecLogin, getUserData, deleteIssue)
 
 module.exports = router;

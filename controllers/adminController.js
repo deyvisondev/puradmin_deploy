@@ -349,7 +349,11 @@ const userLogout = asyncHandler(async (req, res) => {
 })
 
 
-
+const underConstruction = asyncHandler (async(req, res) => {
+    res.render("under-construction", {
+        title: "Frutadmin - Recuperar Palavra Passe"
+    })
+})
 
 
 
@@ -357,5 +361,5 @@ const userLogout = asyncHandler(async (req, res) => {
 module.exports = {
     dashboard,
     makeLogin,
-    userLogout
+    userLogout,
 }

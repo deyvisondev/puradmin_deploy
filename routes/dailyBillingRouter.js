@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { addDailyBilling, createDailyBilling, getDailyBilling, editDailyBilling  } = require("../controllers/dailyBillingController")
+const { addDailyBilling, createDailyBilling, getDailyBilling, editDailyBilling, deleteBilling  } = require("../controllers/dailyBillingController")
 const { redirecLogin, redirectHome } = require("../middleware/authMiddleware")
 const { getUserData } = require("../middleware/userDataMiddleware")
 
@@ -12,5 +12,6 @@ router.get("/admin/add-daily-billing", redirecLogin, getUserData, administrador,
 router.post("/admin/add-daily-billing", redirecLogin, getUserData, createDailyBilling)
 router.get("/admin/edit-daily-billing/:daily_billing_id", redirecLogin, getUserData, getDailyBilling)
 router.post("/admin/edit-daily-billing/:daily_billing_id", redirecLogin, getUserData, editDailyBilling)
+router.post("/admin/delete-daily-billing/", redirecLogin, getUserData, deleteBilling)
 
 module.exports = router;
